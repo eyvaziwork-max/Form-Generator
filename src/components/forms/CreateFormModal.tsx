@@ -73,6 +73,7 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
   const [aiPrompt, setAiPrompt] = useState<string>('');
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [aiError, setAiError] = useState<string | null>(null);
+  const [aiNotice, setAiNotice] = useState<string | null>(null);
   const [aiGeneratedData, setAiGeneratedData] = useState<{
     title: string;
     description: string;
@@ -547,6 +548,7 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
 
     setIsGenerating(true);
     setAiError(null);
+    setAiNotice(null);
 
     try {
       const response = await fetch('/api/generate-form', {
@@ -560,6 +562,10 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
       const resJson = await response.json();
       if (!response.ok || !resJson.success) {
         throw new Error(resJson.error || 'خطایی در ارتباط با هوش مصنوعی و تولید ساختار فرم رخ داد.');
+      }
+
+      if (resJson.notice) {
+        setAiNotice(resJson.notice);
       }
 
       const generated = resJson.data;
@@ -595,7 +601,18 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
       setDescription(newDesc);
     } catch (err: any) {
       console.error('AI Form Generation error:', err);
-      setAiError(err.message || 'برقراری ارتباط با وب‌سرویس هوش مصنوعی با خطا مواجه شد.');
+      let errMsg = err?.message || 'برقراری ارتباط با وب‌سرویس هوش مصنوعی با خطا مواجه شد.';
+      if (errMsg.includes('503') || errMsg.includes('high demand') || errMsg.includes('UNAVAILABLE')) {
+        errMsg = 'سرورهای هوش مصنوعی در این لحظه با ترافیک موقت مواجه هستند. لطفاً مجدداً دکمه «تلاش مجدد» را بزنید.';
+      } else if (errMsg.includes('{') && errMsg.includes('}')) {
+        try {
+          const parsed = JSON.parse(errMsg.replace(/^error:\s*/, ''));
+          errMsg = parsed.message || parsed.error?.message || errMsg;
+        } catch {
+          // ignore
+        }
+      }
+      setAiError(errMsg);
     } finally {
       setIsGenerating(false);
     }
@@ -701,10 +718,10 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <h4 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">
-                      دستیار هوشمند ساخت فرم با مدل Gemini 3.8 Flash
+                      دستیار هوشمند ساخت فرم با هوش مصنوعی Gemini
                     </h4>
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-200/70 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-200 font-bold">
-                      هوش مصنوعی
+                      پایداری ابری
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
@@ -814,6 +831,14 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
                 <p className="text-xs text-slate-400 dark:text-slate-500 max-w-sm mx-auto">
                   شناسایی نیازمندی‌ها، عناوین فارسی، نام‌های فنی و گزینه‌های انتخابی در حال انجام است.
                 </p>
+              </div>
+            )}
+
+            {/* Notice Message */}
+            {aiNotice && (
+              <div className="p-3.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-indigo-800 dark:text-indigo-200 text-xs flex items-center gap-2 animate-in fade-in">
+                <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
+                <span>{aiNotice}</span>
               </div>
             )}
 

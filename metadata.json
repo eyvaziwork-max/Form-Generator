@@ -1,0 +1,7 @@
+{
+  "name": "FormSaz Pro - سیستم فرم‌ساز پیشرفته و هوشمند",
+  "description": "سیستم فرم‌ساز حرفه‌ای، مدرن و ریسپانسیو با درگ اند دراپ، اعتبارسنجی هوشمند، منطق شرطی و مدیریت جامع پاسخ‌ها",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

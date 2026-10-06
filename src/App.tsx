@@ -7,6 +7,7 @@ import { DashboardView } from './components/dashboard/DashboardView';
 import { FormListView } from './components/forms/FormListView';
 import { CreateFormModal } from './components/forms/CreateFormModal';
 import { FormSettingsModal } from './components/forms/FormSettingsModal';
+import { ShareFormModal } from './components/forms/ShareFormModal';
 import { FormBuilderView } from './components/builder/FormBuilderView';
 import { ResponsesView } from './components/responses/ResponsesView';
 import { PublicFormView } from './components/renderer/PublicFormView';
@@ -32,6 +33,10 @@ export default function App() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [settingsModalForm, setSettingsModalForm] = useState<Form | null>(null);
   const [previewModalForm, setPreviewModalForm] = useState<Form | null>(null);
+  const [shareModalForm, setShareModalForm] = useState<Form | null>(null);
+
+  // User-Only (Standalone Public View - No Admin Panel)
+  const [isUserOnlyMode, setIsUserOnlyMode] = useState<boolean>(false);
 
   // Confirm delete dialog
   const [confirmDialog, setConfirmDialog] = useState<{
@@ -46,7 +51,7 @@ export default function App() {
     onConfirm: () => {},
   });
 
-  // Load initial data
+  // Load initial data and parse URL params for direct form access
   const refreshData = () => {
     const loadedForms = dbService.getForms();
     setForms(loadedForms);
@@ -60,6 +65,40 @@ export default function App() {
 
   useEffect(() => {
     refreshData();
+
+    // Check URL parameters for direct public form access (e.g., ?form=xxx or ?f=xxx or ?view=user)
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const formParam =
+        params.get('form') ||
+        params.get('f') ||
+        params.get('id') ||
+        params.get('slug');
+      const viewParam = params.get('view') || params.get('mode');
+
+      if (formParam) {
+        const loaded = dbService.getForms();
+        const matched = loaded.find(
+          (f) =>
+            f.id === formParam ||
+            f.slug === formParam ||
+            f.id.toLowerCase() === formParam.toLowerCase() ||
+            (f.slug && f.slug.toLowerCase() === formParam.toLowerCase())
+        );
+
+        if (matched) {
+          setSelectedFormId(matched.id);
+          setCurrentTab('public');
+          // If view=user or accessed directly through ?form=, isolate user from admin panel
+          setIsUserOnlyMode(true);
+        }
+      } else if (viewParam === 'user' || viewParam === 'public') {
+        setCurrentTab('public');
+        setIsUserOnlyMode(true);
+      }
+    } catch (e) {
+      console.error('Error parsing URL parameters:', e);
+    }
   }, []);
 
   const showToast = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
@@ -157,12 +196,11 @@ export default function App() {
     });
   };
 
-  // Copy shareable link
+  // Copy shareable link / Open Share modal
   const handleCopyLink = (formId: string) => {
-    const url = `${window.location.origin}?form=${formId}`;
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(url);
-      showToast('لینک اشتراک‌گذاری فرم در کلیپ‌بورد کپی شد.', 'success');
+    const form = forms.find((f) => f.id === formId);
+    if (form) {
+      setShareModalForm(form);
     }
   };
 
@@ -249,6 +287,19 @@ export default function App() {
         }}
       />
 
+      {/* Share and Public User Link Modal */}
+      <ShareFormModal
+        isOpen={!!shareModalForm}
+        form={shareModalForm}
+        onClose={() => setShareModalForm(null)}
+        onOpenUserView={(formId) => {
+          setSelectedFormId(formId);
+          setCurrentTab('public');
+          setIsUserOnlyMode(true);
+        }}
+        onShowToast={showToast}
+      />
+
       {/* Form Device Preview Modal */}
       {previewModalForm && (
         <div className="fixed inset-0 z-50 p-2 sm:p-6 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center animate-in fade-in">
@@ -269,8 +320,8 @@ export default function App() {
         </div>
       )}
 
-      {/* Top Header */}
-      {currentTab !== 'public' && (
+      {/* Top Header (Hidden in Public and User-Only modes) */}
+      {currentTab !== 'public' && !isUserOnlyMode && (
         <Header
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
@@ -288,8 +339,18 @@ export default function App() {
           <PublicFormView
             form={selectedForm}
             onSubmit={handlePublicSubmit}
-            onBackToDashboard={() => setCurrentTab('dashboard')}
+            onBackToDashboard={() => {
+              setIsUserOnlyMode(false);
+              setCurrentTab('dashboard');
+            }}
             onShowToast={showToast}
+            isUserOnlyMode={isUserOnlyMode}
+            onToggleUserOnlyMode={() => setIsUserOnlyMode((prev) => !prev)}
+            onOpenAdminLogin={() => {
+              setIsUserOnlyMode(false);
+              setCurrentTab('dashboard');
+              showToast('ورود به پنل مدیریت با موفقیت انجام شد.', 'info');
+            }}
           />
         ) : (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
@@ -311,6 +372,7 @@ export default function App() {
                   setSelectedFormId(id);
                   setCurrentTab('public');
                 }}
+                onOpenShare={(f) => setShareModalForm(f)}
               />
             )}
 
@@ -347,6 +409,7 @@ export default function App() {
                   onSaveForm={handleSaveForm}
                   onOpenPreview={(f) => setPreviewModalForm(f)}
                   onOpenSettings={(f) => setSettingsModalForm(f)}
+                  onOpenShare={(f) => setShareModalForm(f)}
                   onBackToForms={() => setCurrentTab('forms')}
                   onShowToast={showToast}
                 />

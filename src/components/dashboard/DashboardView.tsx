@@ -14,6 +14,7 @@ import {
   Layers,
   Sparkles,
   BarChart2,
+  Share2,
 } from 'lucide-react';
 import { Form, DashboardStats, AuditLog } from '../../types/form';
 
@@ -25,6 +26,7 @@ interface DashboardViewProps {
   onSelectFormForBuilder: (formId: string) => void;
   onSelectFormForResponses: (formId: string) => void;
   onOpenPublicForm: (formId: string) => void;
+  onOpenShare?: (form: Form) => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
@@ -35,6 +37,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onSelectFormForBuilder,
   onSelectFormForResponses,
   onOpenPublicForm,
+  onOpenShare,
 }) => {
   // Max count for chart scale
   const maxChartCount = Math.max(...stats.recentResponsesChart.map((c) => c.count), 5);
@@ -308,10 +311,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       >
                         مشاهده پاسخ‌ها
                       </button>
+                      {onOpenShare && (
+                        <button
+                          onClick={() => onOpenShare(form)}
+                          title="اشتراک‌گذاری و دریافت لینک اختصاصی کاربر"
+                          className="p-1.5 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Share2 className="w-4 h-4" />
+                        </button>
+                      )}
                       <button
                         onClick={() => onOpenPublicForm(form.id)}
-                        title="مشاهده فرم عمومی"
-                        className="p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 rounded-lg transition-colors"
+                        title="پیش‌نمایش فرم عمومی"
+                        className="p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 rounded-lg transition-colors cursor-pointer"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </button>

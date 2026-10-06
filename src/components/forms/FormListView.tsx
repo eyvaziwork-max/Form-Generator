@@ -387,12 +387,20 @@ export const FormListView: React.FC<FormListViewProps> = ({
                       پیش‌نمایش
                     </button>
                     <button
+                      onClick={() => onCopyLink(form.id)}
+                      className="flex items-center gap-1 px-2 py-1 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 rounded-md hover:bg-indigo-50 dark:hover:bg-indigo-950/50 font-bold"
+                      title="دریافت لینک اختصاصی کاربر و کد جاگذاری (بدون پنل ادمین)"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
+                      لینک کاربر
+                    </button>
+                    <button
                       onClick={() => onOpenPublicForm(form.id)}
                       className="flex items-center gap-1 px-2 py-1 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 rounded-md hover:bg-emerald-50 dark:hover:bg-emerald-950/50"
                       title="مشاهده مستقیم فرم نهایی"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      لینک عمومی
+                      پیش‌نمایش فرم
                     </button>
                   </div>
 

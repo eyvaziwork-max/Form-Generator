@@ -31,6 +31,9 @@ interface PublicFormViewProps {
   }>;
   onBackToDashboard: () => void;
   onShowToast: (msg: string, type?: 'success' | 'error' | 'info') => void;
+  isUserOnlyMode?: boolean;
+  onToggleUserOnlyMode?: () => void;
+  onOpenAdminLogin?: () => void;
 }
 
 export const PublicFormView: React.FC<PublicFormViewProps> = ({
@@ -38,6 +41,9 @@ export const PublicFormView: React.FC<PublicFormViewProps> = ({
   onSubmit,
   onBackToDashboard,
   onShowToast,
+  isUserOnlyMode = false,
+  onToggleUserOnlyMode,
+  onOpenAdminLogin,
 }) => {
   const { isDark, toggleTheme } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,6 +54,14 @@ export const PublicFormView: React.FC<PublicFormViewProps> = ({
   const [submittedDate, setSubmittedDate] = useState<string>('');
   const [emailNotified, setEmailNotified] = useState<boolean>(false);
   const [notifiedEmail, setNotifiedEmail] = useState<string>('');
+
+  const handleCopyUserLink = () => {
+    const url = `${window.location.origin}/?form=${form.slug || form.id}&view=user`;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url);
+      onShowToast('لینک اختصاصی کاربر در کلیپ‌بورد کپی شد.', 'success');
+    }
+  };
 
   const handleSubmit = async (values: Record<string, any>) => {
     setIsSubmitting(true);
@@ -93,38 +107,106 @@ export const PublicFormView: React.FC<PublicFormViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-100/70 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
-      {/* Top Navigation Strip */}
-      <div className="max-w-3xl mx-auto mb-6 flex items-center justify-between">
-        <button
-          onClick={onBackToDashboard}
-          className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xs hover:shadow-xs transition-all cursor-pointer"
-        >
-          <ArrowRight className="w-4 h-4" />
-          <span>بازگشت به پنل مدیریت</span>
-        </button>
+    <div className="min-h-screen bg-slate-100/70 dark:bg-slate-950 py-6 sm:py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+      {/* Top Strip */}
+      {isUserOnlyMode ? (
+        /* PURE USER-ONLY TOP BAR (NO ADMIN CONTROLS) */
+        <div className="max-w-2xl mx-auto mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-xs">
+              <Layers className="w-4 h-4" />
+            </div>
+            <span className="font-extrabold text-xs sm:text-sm text-slate-800 dark:text-slate-100 truncate max-w-[200px] sm:max-w-xs">
+              {form.title}
+            </span>
+          </div>
 
-        <div className="flex items-center gap-3">
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 text-slate-500 dark:text-slate-400 hover:text-amber-500 dark:hover:text-amber-400 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all border border-slate-200 dark:border-slate-800 shadow-2xs cursor-pointer"
-            title={isDark ? 'تغییر به حالت روز (روشن)' : 'تغییر به حالت شب (تاریک)'}
-            aria-label="تغییر تم"
-          >
-            {isDark ? (
-              <Sun className="w-4 h-4 text-amber-400" />
-            ) : (
-              <Moon className="w-4 h-4 text-slate-600" />
-            )}
-          </button>
+          <div className="flex items-center gap-3">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-slate-500 dark:text-slate-400 hover:text-amber-500 dark:hover:text-amber-400 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all border border-slate-200 dark:border-slate-800 shadow-2xs cursor-pointer"
+              title={isDark ? 'تغییر به حالت روز (روشن)' : 'تغییر به حالت شب (تاریک)'}
+              aria-label="تغییر تم"
+            >
+              {isDark ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-600" />
+              )}
+            </button>
 
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>ارتباط امن SSL</span>
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span className="hidden sm:inline">اتصال امن SSL</span>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        /* ADMIN PREVIEW TOP BAR */
+        <div className="max-w-3xl mx-auto mb-6 space-y-3">
+          {/* Admin Preview Notification Alert Banner */}
+          <div className="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/80 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2 text-amber-900 dark:text-amber-200">
+              <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>
+                <strong>پیش‌نمایش مدیر:</strong> کاربران عادی این نوار و دکمه بازگشت به پنل را نخواهند دید.
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleCopyUserLink}
+                className="px-2.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 font-bold flex items-center gap-1 shadow-2xs cursor-pointer"
+              >
+                <Copy className="w-3.5 h-3.5" />
+                <span>کپی لینک کاربر</span>
+              </button>
+              {onToggleUserOnlyMode && (
+                <button
+                  type="button"
+                  onClick={onToggleUserOnlyMode}
+                  className="px-2.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center gap-1 shadow-2xs cursor-pointer"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>تست نمای خالص کاربر</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <button
+              onClick={onBackToDashboard}
+              className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 bg-white dark:bg-slate-900 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+            >
+              <ArrowRight className="w-4 h-4" />
+              <span>بازگشت به پنل مدیریت</span>
+            </button>
+
+            <div className="flex items-center gap-3">
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-slate-500 dark:text-slate-400 hover:text-amber-500 dark:hover:text-amber-400 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all border border-slate-200 dark:border-slate-800 shadow-2xs cursor-pointer"
+                title={isDark ? 'تغییر به حالت روز (روشن)' : 'تغییر به حالت شب (تاریک)'}
+                aria-label="تغییر تم"
+              >
+                {isDark ? (
+                  <Sun className="w-4 h-4 text-amber-400" />
+                ) : (
+                  <Moon className="w-4 h-4 text-slate-600" />
+                )}
+              </button>
+
+              <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span>ارتباط امن SSL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-2xl mx-auto">
         {submissionSuccess ? (
@@ -270,6 +352,28 @@ export const PublicFormView: React.FC<PublicFormViewProps> = ({
             </div>
           </div>
         )}
+
+        {/* Clean Security Footer */}
+        <div className="mt-8 text-center space-y-2">
+          <div className="text-xs text-slate-400 dark:text-slate-500 flex items-center justify-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+            <span>اطلاعات این فرم با پروتکل امن SSL ثبت و رمزنگاری می‌شود</span>
+          </div>
+
+          {/* Admin shortcut if in user-only mode for easy testing */}
+          {isUserOnlyMode && onOpenAdminLogin && (
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={onOpenAdminLogin}
+                className="text-[11px] text-slate-400/80 dark:text-slate-600 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer"
+                title="ورود مدیر فرم‌ساز"
+              >
+                ورود به پنل مدیریت
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

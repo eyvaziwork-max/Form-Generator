@@ -87,6 +87,11 @@ export interface FormSettings {
   notificationEmail?: string;
   emailSubjectTemplate?: string;
   includeSubmissionSummary?: boolean;
+  // Webhook Integration
+  webhookEnabled?: boolean;
+  webhookUrl?: string;
+  webhookSecret?: string;
+  webhookIncludeMetadata?: boolean;
 }
 
 export interface Form {

@@ -28,6 +28,8 @@ interface PublicFormViewProps {
     errors?: Record<string, string>;
     emailNotified?: boolean;
     notificationEmail?: string;
+    webhookDispatched?: boolean;
+    webhookUrl?: string;
   }>;
   onBackToDashboard: () => void;
   onShowToast: (msg: string, type?: 'success' | 'error' | 'info') => void;

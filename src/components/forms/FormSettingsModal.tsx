@@ -14,8 +14,17 @@ import {
   CheckCircle2,
   Sparkles,
   Info,
+  Webhook,
+  Code2,
+  Globe,
+  RefreshCw,
+  AlertCircle,
+  Loader2,
+  Copy,
+  Terminal,
 } from 'lucide-react';
 import { Form, FormSettings } from '../../types/form';
+import { dbService } from '../../services/db';
 
 interface FormSettingsModalProps {
   isOpen: boolean;
@@ -32,7 +41,7 @@ export const FormSettingsModal: React.FC<FormSettingsModalProps> = ({
 }) => {
   if (!isOpen || !form) return null;
 
-  const [activeTab, setActiveTab] = useState<'general' | 'notifications'>('general');
+  const [activeTab, setActiveTab] = useState<'general' | 'notifications' | 'webhook'>('general');
 
   const [title, setTitle] = useState(form.title);
   const [description, setDescription] = useState(form.description);
@@ -66,6 +75,73 @@ export const FormSettingsModal: React.FC<FormSettingsModalProps> = ({
   const [testEmailSent, setTestEmailSent] = useState(false);
   const [showEmailPreview, setShowEmailPreview] = useState(false);
 
+  // Webhook Integration States
+  const [webhookEnabled, setWebhookEnabled] = useState(
+    form.settings?.webhookEnabled || false
+  );
+  const [webhookUrl, setWebhookUrl] = useState(
+    form.settings?.webhookUrl || ''
+  );
+  const [webhookSecret, setWebhookSecret] = useState(
+    form.settings?.webhookSecret || ''
+  );
+  const [webhookIncludeMetadata, setWebhookIncludeMetadata] = useState(
+    form.settings?.webhookIncludeMetadata !== false
+  );
+  const [isTestingWebhook, setIsTestingWebhook] = useState(false);
+  const [webhookTestResult, setWebhookTestResult] = useState<{
+    success: boolean;
+    status?: number;
+    statusText?: string;
+    durationMs?: number;
+    error?: string;
+    responsePreview?: string;
+  } | null>(null);
+  const [showWebhookPayloadPreview, setShowWebhookPayloadPreview] = useState(false);
+  const [copiedWebhookPayload, setCopiedWebhookPayload] = useState(false);
+
+  const handleTestWebhook = async () => {
+    if (!webhookUrl.trim() || !webhookUrl.trim().startsWith('http')) {
+      alert('لطفاً آدرس معتبر وب‌هوک (شروع با http:// یا https://) وارد فرمایید.');
+      return;
+    }
+
+    setIsTestingWebhook(true);
+    setWebhookTestResult(null);
+
+    try {
+      const samplePayload = dbService.generateWebhookPayloadPreview(form);
+      const res = await fetch('/api/webhook/test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: webhookUrl.trim(),
+          secret: webhookSecret.trim(),
+          payload: samplePayload,
+        }),
+      });
+
+      const data = await res.json();
+      setWebhookTestResult(data);
+    } catch (err: any) {
+      setWebhookTestResult({
+        success: false,
+        error: err.message || 'خطا در ارتباط با سرور تست وب‌هوک.',
+      });
+    } finally {
+      setIsTestingWebhook(false);
+    }
+  };
+
+  const handleCopyWebhookPayload = () => {
+    const payload = dbService.generateWebhookPayloadPreview(form);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+      setCopiedWebhookPayload(true);
+      setTimeout(() => setCopiedWebhookPayload(false), 2500);
+    }
+  };
+
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -83,6 +159,10 @@ export const FormSettingsModal: React.FC<FormSettingsModalProps> = ({
       notificationEmail: notificationEmail.trim(),
       emailSubjectTemplate: emailSubjectTemplate.trim(),
       includeSubmissionSummary,
+      webhookEnabled,
+      webhookUrl: webhookUrl.trim(),
+      webhookSecret: webhookSecret.trim(),
+      webhookIncludeMetadata,
     };
 
     onSave(form.id, {
@@ -144,32 +224,48 @@ export const FormSettingsModal: React.FC<FormSettingsModalProps> = ({
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex items-center gap-2 mt-4 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl text-xs font-semibold shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 mt-4 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl text-xs font-semibold shrink-0">
           <button
             type="button"
             onClick={() => setActiveTab('general')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg transition-all cursor-pointer ${
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg transition-all cursor-pointer ${
               activeTab === 'general'
                 ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <Sliders className="w-4 h-4" />
-            <span>تنظیمات عمومی و ظاهر</span>
+            <span className="truncate">تنظیمات عمومی</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('notifications')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg transition-all cursor-pointer ${
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg transition-all cursor-pointer ${
               activeTab === 'notifications'
                 ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <Mail className="w-4 h-4" />
-            <span>اطلاع‌رسانی ایمیلی</span>
+            <span className="truncate">اعلان ایمیلی</span>
             {emailNotificationEnabled && (
+              <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-200 dark:ring-emerald-900" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('webhook')}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg transition-all cursor-pointer ${
+              activeTab === 'webhook'
+                ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <Webhook className="w-4 h-4" />
+            <span className="truncate">ارسال به وب‌هوک (Webhook)</span>
+            {webhookEnabled && (
               <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-200 dark:ring-emerald-900" />
             )}
           </button>
@@ -503,7 +599,244 @@ export const FormSettingsModal: React.FC<FormSettingsModalProps> = ({
             </div>
           )}
 
-          {/* Modal Actions */}
+          {activeTab === 'webhook' && (
+            <div className="space-y-5 animate-in fade-in duration-150">
+              {/* Webhook Callout Banner */}
+              <div className="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/80 flex items-start gap-3">
+                <div className="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                  <Webhook className="w-5 h-5" />
+                </div>
+                <div className="flex-1 text-xs leading-relaxed">
+                  <h4 className="font-extrabold text-slate-900 dark:text-white text-sm mb-1">
+                    ارسال داده‌های فرم به وب‌هوک (HTTP POST Webhook)
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    با فعال‌سازی این قابلیت، به محض ثبت پاسخ توسط هر کاربر، یک درخواست <strong>HTTP POST</strong> به همراه محتوای کامل فیلدها و متادیتا در قالب <strong>JSON</strong> به سرور، CRM یا سامانه‌های اتوماسیون شما (Zapier, Make, n8n) مخابره می‌شود.
+                  </p>
+                </div>
+              </div>
+
+              {/* Webhook Enable Switch */}
+              <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200/80 dark:border-slate-700">
+                <div>
+                  <span className="font-bold text-slate-800 dark:text-slate-200 text-sm block">
+                    فعال‌سازی ارسال وب‌هوک (Webhook Active)
+                  </span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 block">
+                    ارسال آنی پاسخ‌های جدید به نقطه پایانی (Endpoint) مشخص‌شده
+                  </span>
+                </div>
+
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={webhookEnabled}
+                    onChange={(e) => setWebhookEnabled(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-hidden rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                </label>
+              </div>
+
+              {webhookEnabled ? (
+                <div className="space-y-4 pt-1">
+                  {/* Webhook URL Input */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1.5">
+                      آدرس وب‌هوک (Endpoint URL) <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <Globe className="w-4 h-4" />
+                      </div>
+                      <input
+                        type="url"
+                        required={webhookEnabled}
+                        placeholder="https://api.yourdomain.com/api/webhooks/form-response"
+                        value={webhookUrl}
+                        onChange={(e) => setWebhookUrl(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 rounded-xl text-xs font-mono text-left focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                        dir="ltr"
+                      />
+                    </div>
+                    <span className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 block">
+                      درخواست با متد HTTP POST و هدر <code>Content-Type: application/json</code> ارسال می‌شود.
+                    </span>
+                  </div>
+
+                  {/* Webhook Secret Input */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1.5">
+                      کلید امنیتی یا توکن احراز هویت (Webhook Secret / Bearer Token - اختیاری)
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="password"
+                        placeholder="sec_live_9841... یا توکن اختصاصی شما"
+                        value={webhookSecret}
+                        onChange={(e) => setWebhookSecret(e.target.value)}
+                        className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 rounded-xl text-xs font-mono text-left focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                        dir="ltr"
+                      />
+                    </div>
+                    <span className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 block">
+                      در هدرهای <code>X-Webhook-Secret</code> و <code>Authorization: Bearer</code> جهت بررسی اصالت منبع ارسال خواهد شد.
+                    </span>
+                  </div>
+
+                  {/* Include Metadata Switch */}
+                  <label className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={webhookIncludeMetadata}
+                      onChange={(e) => setWebhookIncludeMetadata(e.target.checked)}
+                      className="w-4 h-4 text-indigo-600 rounded-sm border-slate-300 dark:border-slate-600 focus:ring-indigo-500 cursor-pointer"
+                    />
+                    <div>
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
+                        ارسال متادیتا همراه با پاسخ
+                      </span>
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
+                        شامل کد رهگیری یکتا، IP فرستنده، زمان دقیق ثبت (شمسی و Timestamp) و مشخصات فرم
+                      </span>
+                    </div>
+                  </label>
+
+                  {/* Test Webhook Section */}
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div>
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
+                          بررسی صحت اتصال به وب‌هوک
+                        </span>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                          ارسال یک درخواست آزمایشی POST برای سنجش سلامت سرور مقصد
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={handleTestWebhook}
+                        disabled={isTestingWebhook || !webhookUrl.trim()}
+                        className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer shrink-0"
+                      >
+                        {isTestingWebhook ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>در حال ارسال تست...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-3.5 h-3.5" />
+                            <span>ارسال درخواست آزمایشی</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Test Result Display */}
+                    {webhookTestResult && (
+                      <div
+                        className={`p-3 rounded-xl border text-xs animate-in fade-in space-y-1.5 ${
+                          webhookTestResult.success
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
+                            : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900 text-rose-900 dark:text-rose-200'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1.5 font-bold">
+                            {webhookTestResult.success ? (
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                            ) : (
+                              <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
+                            )}
+                            <span>
+                              {webhookTestResult.success
+                                ? 'اتصال موفقیت‌آمیز بود'
+                                : 'خطا در برقراری ارتباط با وب‌هوک'}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-2 font-mono text-[11px]">
+                            {webhookTestResult.status && (
+                              <span className="px-2 py-0.5 rounded-md bg-white/70 dark:bg-slate-800/80 font-bold">
+                                HTTP {webhookTestResult.status} {webhookTestResult.statusText}
+                              </span>
+                            )}
+                            {webhookTestResult.durationMs !== undefined && (
+                              <span className="text-[10px] opacity-80">
+                                {webhookTestResult.durationMs}ms
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {webhookTestResult.error && (
+                          <p className="text-[11px] leading-relaxed opacity-90">
+                            علت خطا: {webhookTestResult.error}
+                          </p>
+                        )}
+
+                        {webhookTestResult.responsePreview && (
+                          <div className="mt-1 pt-1 border-t border-black/10 dark:border-white/10 text-[10px] font-mono truncate" dir="ltr">
+                            پاسخ سرور: {webhookTestResult.responsePreview}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Live JSON Payload Preview Accordion */}
+                  <div className="border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => setShowWebhookPayloadPreview(!showWebhookPayloadPreview)}
+                      className="w-full flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Code2 className="w-4 h-4 text-indigo-500" />
+                        <span>مشاهده نمونه ساختار داده‌های ارسالی (JSON Payload Preview)</span>
+                      </span>
+                      <span className="text-indigo-600 dark:text-indigo-400 text-[11px]">
+                        {showWebhookPayloadPreview ? 'بستن پیش‌نمایش' : 'مشاهده ساختار'}
+                      </span>
+                    </button>
+
+                    {showWebhookPayloadPreview && (
+                      <div className="p-3.5 bg-slate-900 border-t border-slate-800 text-left space-y-2 animate-in fade-in" dir="ltr">
+                        <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+                          <span className="text-[11px] font-mono text-slate-400">
+                            POST application/json
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleCopyWebhookPayload}
+                            className="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 flex items-center gap-1 font-mono transition-colors cursor-pointer"
+                          >
+                            <Copy className="w-3 h-3" />
+                            <span>{copiedWebhookPayload ? 'کپی شد!' : 'Copy JSON'}</span>
+                          </button>
+                        </div>
+                        <pre className="text-[11px] font-mono text-emerald-400 overflow-x-auto max-h-56 leading-relaxed p-1">
+                          {JSON.stringify(dbService.generateWebhookPayloadPreview(form), null, 2)}
+                        </pre>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="p-5 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 text-center space-y-2">
+                  <Webhook className="w-8 h-8 text-slate-400 mx-auto" />
+                  <p className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    قابلیت ارسال وب‌هوک در این فرم غیرفعال است.
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+                    برای اتصال فرم به سیستم‌های خارجی (اتوماسیون‌ها، Zapier، وب‌سرویس‌های اختصاصی یا پیام‌رسان‌ها)، سوییچ بالا را فعال نمایید.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
             <button
               type="button"

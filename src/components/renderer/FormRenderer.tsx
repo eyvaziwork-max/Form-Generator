@@ -10,6 +10,10 @@ import {
   Send,
   Loader2,
   FileCheck,
+  Check,
+  AlertTriangle,
+  Info,
+  ShieldCheck,
 } from 'lucide-react';
 import { Form, FormField, ConditionalRule } from '../../types/form';
 import { validateFieldValue, normalizePersianNumbers } from '../../services/validation';
@@ -28,6 +32,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
   const [values, setValues] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [dirty, setDirty] = useState<Record<string, boolean>>({});
   const [showPassword, setShowPassword] = useState<Record<string, boolean>>({});
 
   // Initialize default values
@@ -47,41 +52,6 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
     setValues(initial);
   }, [form]);
 
-  // Handle value change
-  const handleInputChange = (field: FormField, val: any) => {
-    const updated = { ...values, [field.name]: val };
-    setValues(updated);
-
-    // Validate on change if touched
-    if (touched[field.name]) {
-      const result = validateFieldValue(field, val);
-      if (!result.isValid && result.error) {
-        setErrors((prev) => ({ ...prev, [field.name]: result.error! }));
-      } else {
-        setErrors((prev) => {
-          const next = { ...prev };
-          delete next[field.name];
-          return next;
-        });
-      }
-    }
-  };
-
-  // Handle blur
-  const handleInputBlur = (field: FormField) => {
-    setTouched((prev) => ({ ...prev, [field.name]: true }));
-    const result = validateFieldValue(field, values[field.name]);
-    if (!result.isValid && result.error) {
-      setErrors((prev) => ({ ...prev, [field.name]: result.error! }));
-    } else {
-      setErrors((prev) => {
-        const next = { ...prev };
-        delete next[field.name];
-        return next;
-      });
-    }
-  };
-
   // Evaluate conditional logic rule
   const isFieldVisible = (field: FormField): boolean => {
     if (!field.active) return false;
@@ -91,9 +61,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
     const { action, rules } = field.conditionalLogic;
     if (!rules || rules.length === 0) return true;
 
-    // Check all rules
     const allRulesMet = rules.every((rule: ConditionalRule) => {
-      // Find trigger field
       const triggerField = form.fields.find((f) => f.id === rule.fieldId);
       if (!triggerField) return true;
 
@@ -120,41 +88,190 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
     return action === 'show' ? allRulesMet : !allRulesMet;
   };
 
-  // Calculate completion progress
+  /**
+   * Real-time Validation Engine:
+   * Determines validity and whether an error message should be actively displayed.
+   */
+  const validateSingleField = (
+    field: FormField,
+    val: any,
+    mode: 'change' | 'blur' | 'submit'
+  ): { isValid: boolean; error?: string; showImmediateError: boolean } => {
+    const result = validateFieldValue(field, val);
+    const strVal = val !== undefined && val !== null ? String(val).trim() : '';
+    const normalized = normalizePersianNumbers(strVal);
+    const isCurrentlyTouched = !!touched[field.name] || mode === 'blur' || mode === 'submit';
+
+    if (result.isValid) {
+      return { isValid: true, showImmediateError: false };
+    }
+
+    // If blurred or submitted, always show error
+    if (isCurrentlyTouched) {
+      return { isValid: false, error: result.error, showImmediateError: true };
+    }
+
+    // In real-time 'change' mode, determine if the error should be displayed immediately:
+    if (mode === 'change') {
+      // 1. If this field already had an error displayed, update it live
+      if (errors[field.name]) {
+        return { isValid: false, error: result.error, showImmediateError: true };
+      }
+
+      // 2. Format-specific live error triggers:
+      if (field.type === 'phone') {
+        // Show live error if user has typed 11+ digits or typed non-09 start
+        if (normalized.length >= 11 || (normalized.length >= 2 && !normalized.startsWith('09'))) {
+          return { isValid: false, error: result.error, showImmediateError: true };
+        }
+      } else if (field.type === 'national_id') {
+        // Show live error if user reached 10 digits
+        if (normalized.length >= 10) {
+          return { isValid: false, error: result.error, showImmediateError: true };
+        }
+      } else if (field.type === 'email') {
+        // Show live error if user entered '@' and domain part is malformed
+        if (strVal.includes('@') && strVal.length > 5 && strVal.includes('.')) {
+          return { isValid: false, error: result.error, showImmediateError: true };
+        }
+      } else if (field.type === 'student_id') {
+        // Show live error if user typed non-digits
+        if (/[^\d]/.test(normalized)) {
+          return { isValid: false, error: result.error, showImmediateError: true };
+        }
+        if (normalized.length > 14) {
+          return { isValid: false, error: result.error, showImmediateError: true };
+        }
+      } else if (field.maxLength && strVal.length > field.maxLength) {
+        return { isValid: false, error: result.error, showImmediateError: true };
+      } else if (
+        field.type === 'select' ||
+        field.type === 'radio' ||
+        field.type === 'checkbox' ||
+        field.type === 'multiselect'
+      ) {
+        return { isValid: false, error: result.error, showImmediateError: true };
+      }
+    }
+
+    return { isValid: false, error: result.error, showImmediateError: false };
+  };
+
+  // Handle value change with Real-time Validation
+  const handleInputChange = (field: FormField, val: any) => {
+    const updated = { ...values, [field.name]: val };
+    setValues(updated);
+    setDirty((prev) => ({ ...prev, [field.name]: true }));
+
+    // Run Real-Time Validation
+    const check = validateSingleField(field, val, 'change');
+
+    if (check.isValid) {
+      // Clear error immediately in real time
+      setErrors((prev) => {
+        if (!prev[field.name]) return prev;
+        const next = { ...prev };
+        delete next[field.name];
+        return next;
+      });
+    } else if (check.showImmediateError && check.error) {
+      // Display error immediately in real time
+      setErrors((prev) => ({ ...prev, [field.name]: check.error! }));
+    } else {
+      // Clear error if field was corrected but not yet in full trigger
+      if (errors[field.name] && !touched[field.name]) {
+        setErrors((prev) => {
+          const next = { ...prev };
+          delete next[field.name];
+          return next;
+        });
+      }
+    }
+  };
+
+  // Handle blur
+  const handleInputBlur = (field: FormField) => {
+    setTouched((prev) => ({ ...prev, [field.name]: true }));
+    const check = validateSingleField(field, values[field.name], 'blur');
+
+    if (!check.isValid && check.error) {
+      setErrors((prev) => ({ ...prev, [field.name]: check.error! }));
+    } else {
+      setErrors((prev) => {
+        if (!prev[field.name]) return prev;
+        const next = { ...prev };
+        delete next[field.name];
+        return next;
+      });
+    }
+  };
+
+  // Active interactive fields
   const activeInteractiveFields = form.fields.filter(
     (f) => f.active && f.type !== 'static_text' && f.type !== 'divider' && f.type !== 'hidden'
   );
-  const filledCount = activeInteractiveFields.filter((f) => {
+
+  const visibleInteractiveFields = activeInteractiveFields.filter((f) => isFieldVisible(f));
+  const requiredVisibleFields = visibleInteractiveFields.filter((f) => f.required);
+
+  // Real-time counts
+  const filledCount = visibleInteractiveFields.filter((f) => {
     const val = values[f.name];
     return val !== undefined && val !== null && String(val).trim() !== '';
   }).length;
+
+  const validFieldsCount = visibleInteractiveFields.filter((f) => {
+    const val = values[f.name];
+    const strVal = val !== undefined && val !== null ? String(val).trim() : '';
+    const hasValue = strVal !== '' && (!Array.isArray(val) || val.length > 0);
+    return hasValue && !errors[f.name] && validateFieldValue(f, val).isValid;
+  }).length;
+
+  const completedRequiredCount = requiredVisibleFields.filter((f) => {
+    const val = values[f.name];
+    const strVal = val !== undefined && val !== null ? String(val).trim() : '';
+    const hasValue = strVal !== '' && (!Array.isArray(val) || val.length > 0);
+    return hasValue && !errors[f.name] && validateFieldValue(f, val).isValid;
+  }).length;
+
+  const activeErrorsCount = Object.keys(errors).filter((key) => {
+    const f = form.fields.find((field) => field.name === key);
+    return f && isFieldVisible(f);
+  }).length;
+
   const progressPercent =
-    activeInteractiveFields.length > 0
-      ? Math.round((filledCount / activeInteractiveFields.length) * 100)
+    visibleInteractiveFields.length > 0
+      ? Math.round((filledCount / visibleInteractiveFields.length) * 100)
       : 0;
 
   // Handle Submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Mark all as touched and validate
+    // Mark all visible interactive fields as touched and validate
     const newErrors: Record<string, string> = {};
     const newTouched: Record<string, boolean> = {};
 
-    activeInteractiveFields.forEach((f) => {
+    visibleInteractiveFields.forEach((f) => {
       newTouched[f.name] = true;
-      if (isFieldVisible(f)) {
-        const result = validateFieldValue(f, values[f.name]);
-        if (!result.isValid && result.error) {
-          newErrors[f.name] = result.error;
-        }
+      const result = validateFieldValue(f, values[f.name]);
+      if (!result.isValid && result.error) {
+        newErrors[f.name] = result.error;
       }
     });
 
-    setTouched(newTouched);
+    setTouched((prev) => ({ ...prev, ...newTouched }));
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
+      // Find first errored field and scroll to it smoothly
+      const firstErrorField = visibleInteractiveFields.find((f) => newErrors[f.name]);
+      if (firstErrorField) {
+        const el = document.getElementById(`field-container-${firstErrorField.id}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
       return;
     }
 
@@ -165,17 +282,39 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Progress Bar */}
-      {activeInteractiveFields.length > 1 && (
-        <div className="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700">
-          <div className="flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">
-            <span>پیشرفت تکمیل فرم</span>
-            <span className="text-indigo-600 dark:text-indigo-400">{progressPercent}٪</span>
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      {/* Progress Bar & Real-time Completion Status */}
+      {visibleInteractiveFields.length > 1 && (
+        <div className="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700 space-y-2">
+          <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <span className="flex items-center gap-1.5">
+              <span>پیشرفت تکمیل فرم:</span>
+              <strong className="text-indigo-600 dark:text-indigo-400 font-mono text-sm">
+                {progressPercent}٪
+              </strong>
+            </span>
+            <span className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+              <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
+                <Check className="w-3.5 h-3.5" />
+                <span>{validFieldsCount} فیلد معتبر</span>
+              </span>
+              {requiredVisibleFields.length > 0 && (
+                <span>
+                  ({completedRequiredCount} از {requiredVisibleFields.length} فیلد الزامی)
+                </span>
+              )}
+            </span>
           </div>
-          <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+
+          <div className="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
             <div
-              className="bg-indigo-600 dark:bg-indigo-500 h-full rounded-full transition-all duration-300"
+              className={`h-full rounded-full transition-all duration-300 ${
+                activeErrorsCount > 0
+                  ? 'bg-amber-500'
+                  : progressPercent === 100
+                  ? 'bg-emerald-500'
+                  : 'bg-indigo-600 dark:bg-indigo-500'
+              }`}
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -188,7 +327,15 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
           if (!isFieldVisible(field)) return null;
 
           const error = errors[field.name];
-          const hasError = !!error && touched[field.name];
+          const hasError = !!error;
+          const val = values[field.name];
+          const strVal = val !== undefined && val !== null ? String(val).trim() : '';
+          const hasValue = strVal !== '' && (!Array.isArray(val) || val.length > 0);
+          const isTouchedOrDirty = !!touched[field.name] || !!dirty[field.name];
+          const isValid = !hasError && hasValue && isTouchedOrDirty && validateFieldValue(field, val).isValid;
+
+          // Normalized characters count
+          const normalizedStr = normalizePersianNumbers(strVal);
 
           // Structural Types: Static Text & Divider
           if (field.type === 'divider') {
@@ -213,65 +360,110 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
           return (
             <div
               key={field.id}
-              className={`space-y-1.5 transition-all ${field.cssClass || ''}`}
+              id={`field-container-${field.id}`}
+              className={`space-y-1.5 transition-all p-3 sm:p-3.5 rounded-2xl border ${
+                hasError
+                  ? 'border-rose-300 dark:border-rose-800/80 bg-rose-50/20 dark:bg-rose-950/20 shadow-xs shadow-rose-100 dark:shadow-none'
+                  : isValid
+                  ? 'border-emerald-300/80 dark:border-emerald-800/60 bg-emerald-50/15 dark:bg-emerald-950/15'
+                  : 'border-transparent bg-transparent'
+              } ${field.cssClass || ''}`}
             >
-              {/* Field Label & Required marker */}
-              <div className="flex items-center justify-between">
-                <label className="block text-sm font-bold text-slate-900 dark:text-white">
-                  {field.label}
+              {/* Field Label & Status Header */}
+              <div className="flex items-center justify-between gap-2">
+                <label
+                  htmlFor={`input-${field.id}`}
+                  className="block text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5"
+                >
+                  <span>{field.label}</span>
                   {field.required && (
-                    <span className="text-rose-500 mr-1" title="تکمیل این فیلد الزامی است">
+                    <span className="text-rose-500 font-black text-sm" title="تکمیل این فیلد الزامی است">
                       *
                     </span>
                   )}
                 </label>
 
-                {field.description && (
-                  <span className="text-xs text-slate-400 dark:text-slate-500 hidden sm:inline">
-                    {field.description}
-                  </span>
-                )}
+                <div className="flex items-center gap-2">
+                  {/* Real-Time Valid Status Badge */}
+                  {isValid && (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100/90 dark:bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-700 animate-in fade-in">
+                      <Check className="w-3 h-3 stroke-[3]" />
+                      <span>معتبر</span>
+                    </span>
+                  )}
+
+                  {/* Real-Time Error Badge */}
+                  {hasError && (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 dark:text-rose-300 bg-rose-100/90 dark:bg-rose-950/80 px-2 py-0.5 rounded-full border border-rose-300 dark:border-rose-700 animate-in fade-in">
+                      <AlertCircle className="w-3 h-3" />
+                      <span>نیاز به اصلاح</span>
+                    </span>
+                  )}
+
+                  {field.description && !hasError && !isValid && (
+                    <span className="text-xs text-slate-400 dark:text-slate-500 hidden sm:inline">
+                      {field.description}
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Render Field Input Control */}
               <div className="relative">
                 {/* Textarea */}
                 {field.type === 'textarea' && (
-                  <textarea
-                    rows={3}
-                    placeholder={field.placeholder || ''}
-                    value={values[field.name] || ''}
-                    onChange={(e) => handleInputChange(field, e.target.value)}
-                    onBlur={() => handleInputBlur(field)}
-                    className={`w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 transition-all leading-relaxed ${
-                      hasError
-                        ? 'border-rose-400 dark:border-rose-700 ring-rose-500/20 bg-rose-50/20 dark:bg-rose-950/30'
-                        : 'border-slate-200 dark:border-slate-700 focus:ring-indigo-500/20 focus:border-indigo-500'
-                    }`}
-                  />
+                  <div className="relative">
+                    <textarea
+                      id={`input-${field.id}`}
+                      rows={3}
+                      placeholder={field.placeholder || ''}
+                      value={values[field.name] || ''}
+                      onChange={(e) => handleInputChange(field, e.target.value)}
+                      onBlur={() => handleInputBlur(field)}
+                      aria-invalid={hasError}
+                      className={`w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 transition-all leading-relaxed ${
+                        hasError
+                          ? 'border-rose-400 dark:border-rose-600 ring-rose-500/20 bg-rose-50/30 dark:bg-rose-950/30'
+                          : isValid
+                          ? 'border-emerald-400 dark:border-emerald-600 ring-emerald-500/20 bg-emerald-50/20 dark:bg-emerald-950/30'
+                          : 'border-slate-200 dark:border-slate-700 focus:ring-indigo-500/20 focus:border-indigo-500'
+                      }`}
+                    />
+                    {field.maxLength && (
+                      <span className="absolute left-3 bottom-2.5 text-[10px] font-mono text-slate-400 dark:text-slate-500 bg-white/90 dark:bg-slate-800/90 px-1.5 py-0.5 rounded-md border border-slate-200 dark:border-slate-700">
+                        {strVal.length} / {field.maxLength}
+                      </span>
+                    )}
+                  </div>
                 )}
 
                 {/* Dropdown / Select */}
                 {field.type === 'select' && (
-                  <select
-                    value={values[field.name] || ''}
-                    onChange={(e) => handleInputChange(field, e.target.value)}
-                    onBlur={() => handleInputBlur(field)}
-                    className={`w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 transition-all cursor-pointer ${
-                      hasError
-                        ? 'border-rose-400 dark:border-rose-700 ring-rose-500/20 bg-rose-50/20 dark:bg-rose-950/30'
-                        : 'border-slate-200 dark:border-slate-700 focus:ring-indigo-500/20 focus:border-indigo-500'
-                    }`}
-                  >
-                    <option value="" className="dark:bg-slate-800 dark:text-slate-400">
-                      {field.placeholder || '-- لطفاً یک گزینه را انتخاب فرمایید --'}
-                    </option>
-                    {field.options?.map((opt) => (
-                      <option key={opt.id} value={opt.value} className="dark:bg-slate-800 dark:text-white">
-                        {opt.label}
+                  <div className="relative">
+                    <select
+                      id={`input-${field.id}`}
+                      value={values[field.name] || ''}
+                      onChange={(e) => handleInputChange(field, e.target.value)}
+                      onBlur={() => handleInputBlur(field)}
+                      aria-invalid={hasError}
+                      className={`w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 transition-all cursor-pointer ${
+                        hasError
+                          ? 'border-rose-400 dark:border-rose-600 ring-rose-500/20 bg-rose-50/30 dark:bg-rose-950/30'
+                          : isValid
+                          ? 'border-emerald-400 dark:border-emerald-600 ring-emerald-500/20 bg-emerald-50/20 dark:bg-emerald-950/30'
+                          : 'border-slate-200 dark:border-slate-700 focus:ring-indigo-500/20 focus:border-indigo-500'
+                      }`}
+                    >
+                      <option value="" className="dark:bg-slate-800 dark:text-slate-400">
+                        {field.placeholder || '-- لطفاً یک گزینه را انتخاب فرمایید --'}
                       </option>
-                    ))}
-                  </select>
+                      {field.options?.map((opt) => (
+                        <option key={opt.id} value={opt.value} className="dark:bg-slate-800 dark:text-white">
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 )}
 
                 {/* Radio Group */}
@@ -312,10 +504,11 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                   >
                     <input
                       type="checkbox"
+                      id={`input-${field.id}`}
                       checked={!!values[field.name]}
                       onChange={(e) => handleInputChange(field, e.target.checked)}
                       onBlur={() => handleInputBlur(field)}
-                      className="w-4 h-4 rounded text-indigo-600 focus:ring-0"
+                      className="w-4 h-4 rounded-sm text-indigo-600 focus:ring-0"
                     />
                     <span className="text-sm font-medium">{field.label}</span>
                   </label>
@@ -347,7 +540,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                                 : currentSelected.filter((v: string) => v !== opt.value);
                               handleInputChange(field, updatedList);
                             }}
-                            className="w-4 h-4 rounded text-indigo-600 focus:ring-0"
+                            className="w-4 h-4 rounded-sm text-indigo-600 focus:ring-0"
                           />
                           <span className="text-sm">{opt.label}</span>
                         </label>
@@ -364,7 +557,6 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                         type="button"
                         key={star}
                         onClick={() => handleInputChange(field, star)}
-                        onMouseEnter={() => {}}
                         className="p-1 transition-transform hover:scale-110 focus:outline-hidden cursor-pointer"
                       >
                         <Star
@@ -384,7 +576,15 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
 
                 {/* File & Image Upload Mock */}
                 {(field.type === 'file' || field.type === 'image') && (
-                  <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 rounded-2xl p-6 text-center bg-slate-50 dark:bg-slate-800/60 hover:bg-indigo-50/30 dark:hover:bg-indigo-950/30 transition-all cursor-pointer">
+                  <div
+                    className={`border-2 border-dashed rounded-2xl p-6 text-center transition-all cursor-pointer ${
+                      hasError
+                        ? 'border-rose-400 bg-rose-50/30 dark:bg-rose-950/30'
+                        : isValid
+                        ? 'border-emerald-400 bg-emerald-50/20 dark:bg-emerald-950/20'
+                        : 'border-slate-300 dark:border-slate-700 hover:border-indigo-400 bg-slate-50 dark:bg-slate-800/60'
+                    }`}
+                  >
                     <input
                       type="file"
                       id={`file-${field.id}`}
@@ -410,7 +610,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                   </div>
                 )}
 
-                {/* Standard Inputs: text, fullname, phone, student_id, email, number, date, time, password */}
+                {/* Standard Inputs: text, fullname, phone, student_id, national_id, email, number, date, time, datetime, password */}
                 {[
                   'text',
                   'fullname',
@@ -426,6 +626,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                 ].includes(field.type) && (
                   <div className="relative">
                     <input
+                      id={`input-${field.id}`}
                       type={
                         field.type === 'password'
                           ? showPassword[field.id]
@@ -445,6 +646,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                       value={values[field.name] || ''}
                       onChange={(e) => handleInputChange(field, e.target.value)}
                       onBlur={() => handleInputBlur(field)}
+                      aria-invalid={hasError}
                       dir={
                         field.type === 'phone' ||
                         field.type === 'student_id' ||
@@ -453,13 +655,17 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                           ? 'ltr'
                           : 'rtl'
                       }
-                      className={`w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 transition-all ${
-                        field.type === 'phone' ? 'pl-14 font-mono tracking-wider' : ''
-                      } ${
-                        field.type === 'student_id' ? 'font-mono' : ''
+                      className={`w-full py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 transition-all ${
+                        field.type === 'phone' ? 'pl-14 pr-10 font-mono tracking-wider' : 'px-4'
+                      } ${field.type === 'student_id' || field.type === 'national_id' ? 'font-mono pr-10' : ''} ${
+                        field.type === 'email' ? 'font-mono pr-10' : ''
+                      } ${field.type === 'password' ? 'pl-11 pr-10' : ''} ${
+                        field.type === 'text' || field.type === 'fullname' ? 'pl-10 pr-4' : ''
                       } ${
                         hasError
-                          ? 'border-rose-400 dark:border-rose-700 ring-rose-500/20 bg-rose-50/20 dark:bg-rose-950/30'
+                          ? 'border-rose-400 dark:border-rose-600 ring-rose-500/20 bg-rose-50/30 dark:bg-rose-950/30 focus:border-rose-500'
+                          : isValid
+                          ? 'border-emerald-400 dark:border-emerald-600 ring-emerald-500/20 bg-emerald-50/20 dark:bg-emerald-950/30 focus:border-emerald-500'
                           : 'border-slate-200 dark:border-slate-700 focus:ring-indigo-500/20 focus:border-indigo-500'
                       }`}
                     />
@@ -471,7 +677,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                       </span>
                     )}
 
-                    {/* Password toggle */}
+                    {/* Password toggle button */}
                     {field.type === 'password' && (
                       <button
                         type="button"
@@ -482,6 +688,7 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                           }))
                         }
                         className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1 cursor-pointer"
+                        title={showPassword[field.id] ? 'مخفی‌سازی رمز' : 'نمایش رمز'}
                       >
                         {showPassword[field.id] ? (
                           <EyeOff className="w-4 h-4" />
@@ -490,24 +697,153 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                         )}
                       </button>
                     )}
+
+                    {/* Status icon inside input: LTR fields on right side, RTL fields on left side */}
+                    {(field.type === 'phone' ||
+                      field.type === 'student_id' ||
+                      field.type === 'national_id' ||
+                      field.type === 'email' ||
+                      field.type === 'number' ||
+                      field.type === 'password') && (
+                      <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none">
+                        {hasError && (
+                          <AlertCircle className="w-4 h-4 text-rose-500 dark:text-rose-400 animate-in zoom-in-75 duration-150" />
+                        )}
+                        {isValid && (
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 animate-in zoom-in-75 duration-150" />
+                        )}
+                      </div>
+                    )}
+
+                    {(field.type === 'text' || field.type === 'fullname') && (
+                      <div className="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none">
+                        {hasError && (
+                          <AlertCircle className="w-4 h-4 text-rose-500 dark:text-rose-400 animate-in zoom-in-75 duration-150" />
+                        )}
+                        {isValid && (
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 animate-in zoom-in-75 duration-150" />
+                        )}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
 
-              {/* Error Message with Icon */}
-              {hasError && (
-                <p className="text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1 font-medium mt-1 animate-in fade-in">
-                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                  <span>{error}</span>
-                </p>
+              {/* Real-Time Live Validation Status & Error Messages */}
+              {hasError ? (
+                <div className="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900/60 text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2 mt-1.5 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 dark:text-rose-400 mt-0.5" />
+                  <span className="font-semibold leading-relaxed">{error}</span>
+                </div>
+              ) : (
+                /* Live Real-Time Helper Text while user is typing */
+                <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 dark:text-slate-500 mt-1 px-1">
+                  {/* Phone Helper */}
+                  {field.type === 'phone' && (
+                    <>
+                      <span>{isValid ? 'شماره همراه معتبر و تأیید شد.' : 'فرمت صحیح: ۰۹XXXXXXXXX'}</span>
+                      <span className="font-mono">{normalizedStr.length} / ۱۱ رقم</span>
+                    </>
+                  )}
+
+                  {/* National ID Helper */}
+                  {field.type === 'national_id' && (
+                    <>
+                      <span>{isValid ? 'کد ملی ۱۰ رقمی با الگوریتم کنترل تایید شد.' : '۱۰ رقم عددی مطابق کارت ملی'}</span>
+                      <span className="font-mono">{normalizedStr.length} / ۱۰ رقم</span>
+                    </>
+                  )}
+
+                  {/* Student ID Helper */}
+                  {field.type === 'student_id' && (
+                    <>
+                      <span>{isValid ? 'شماره دانشجویی معتبر است.' : 'فقط اعداد مجاز (بین ۵ الی ۱۴ رقم)'}</span>
+                      <span className="font-mono">{normalizedStr.length} رقم</span>
+                    </>
+                  )}
+
+                  {/* Email Helper */}
+                  {field.type === 'email' && (
+                    <>
+                      <span>{isValid ? 'فرمت آدرس ایمیل تایید گردید.' : 'نمونه: username@domain.com'}</span>
+                    </>
+                  )}
+
+                  {/* Length Constraints Helper */}
+                  {(field.minLength || field.maxLength) &&
+                    field.type !== 'phone' &&
+                    field.type !== 'national_id' &&
+                    field.type !== 'student_id' && (
+                      <>
+                        <span>
+                          {field.minLength && strVal.length < field.minLength
+                            ? `حداقل ${field.minLength} کاراکتر (تاکنون ${strVal.length})`
+                            : 'طول ورودی مجاز'}
+                        </span>
+                        {field.maxLength && (
+                          <span className="font-mono">
+                            {strVal.length} / {field.maxLength}
+                          </span>
+                        )}
+                      </>
+                    )}
+                </div>
               )}
             </div>
           );
         })}
       </div>
 
+      {/* Real-time Pre-Submission Validation Health Summary Bar */}
+      <div className="pt-2">
+        {activeErrorsCount > 0 ? (
+          <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/70 text-xs text-rose-900 dark:text-rose-200 space-y-2 animate-in fade-in duration-200">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 font-bold text-sm">
+                <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
+                <span>
+                  {activeErrorsCount === 1
+                    ? '۱ فیلد نیاز به بررسی و اصلاح دارد:'
+                    : `${activeErrorsCount} فیلد نیاز به بررسی و اصلاح دارند:`}
+                </span>
+              </div>
+              <span className="text-[11px] bg-rose-200/80 dark:bg-rose-900/80 text-rose-800 dark:text-rose-200 px-2 py-0.5 rounded-full font-bold">
+                خطای اعتبارسنجی زنده
+              </span>
+            </div>
+            <p className="text-[11px] leading-relaxed text-rose-700 dark:text-rose-300">
+              پیش از ثبت نهایی، لطفاً مقادیر نامعتبر یا فیلدهای اجباری بالا را اصلاح فرمایید تا فرم ارسال گردد.
+            </p>
+          </div>
+        ) : progressPercent === 100 || (requiredVisibleFields.length > 0 && completedRequiredCount === requiredVisibleFields.length) ? (
+          <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80 text-xs text-emerald-900 dark:text-emerald-200 flex items-center justify-between gap-3 animate-in fade-in duration-200">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <span className="font-bold">
+                تمامی فیلدهای الزامی با موفقیت تکمیل و اعتبارسنجی شدند.
+              </span>
+            </div>
+            <span className="text-[11px] bg-emerald-200/80 dark:bg-emerald-900/80 text-emerald-800 dark:text-emerald-200 px-2.5 py-0.5 rounded-full font-bold">
+              آماده ثبت نهایی
+            </span>
+          </div>
+        ) : (
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80 text-xs text-slate-600 dark:text-slate-300 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Info className="w-4 h-4 text-indigo-500 shrink-0" />
+              <span>
+                اعتبارسنجی بلادرنگ فعال است — اطلاعات با وارد کردن هر کاراکتر بررسی می‌شوند.
+              </span>
+            </div>
+            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+              {completedRequiredCount} / {requiredVisibleFields.length} الزامی
+            </span>
+          </div>
+        )}
+      </div>
+
       {/* Submit Button */}
-      <div className="pt-4">
+      <div className="pt-2">
         <button
           type="submit"
           disabled={isSubmitting}

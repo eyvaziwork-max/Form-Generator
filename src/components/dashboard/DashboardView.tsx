@@ -15,6 +15,7 @@ import {
   Sparkles,
   BarChart2,
   Share2,
+  Code2,
 } from 'lucide-react';
 import { Form, DashboardStats, AuditLog } from '../../types/form';
 
@@ -27,6 +28,7 @@ interface DashboardViewProps {
   onSelectFormForResponses: (formId: string) => void;
   onOpenPublicForm: (formId: string) => void;
   onOpenShare?: (form: Form) => void;
+  onOpenApiDocs?: () => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
@@ -38,6 +40,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onSelectFormForResponses,
   onOpenPublicForm,
   onOpenShare,
+  onOpenApiDocs,
 }) => {
   // Max count for chart scale
   const maxChartCount = Math.max(...stats.recentResponsesChart.map((c) => c.count), 5);
@@ -75,6 +78,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               >
                 <ExternalLink className="w-4 h-4" />
                 مشاهده فرم دانشجویان
+              </button>
+            )}
+            {onOpenApiDocs && (
+              <button
+                onClick={onOpenApiDocs}
+                className="flex items-center gap-2 bg-indigo-900/80 hover:bg-indigo-900 text-indigo-100 font-medium px-4 py-2.5 rounded-xl border border-indigo-400/30 transition-all text-sm backdrop-blur-md shadow-xs"
+              >
+                <Code2 className="w-4 h-4 text-emerald-400" />
+                مستندات API (Swagger)
               </button>
             )}
           </div>

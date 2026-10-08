@@ -464,6 +464,10 @@ class DatabaseService {
         notificationEmail: '',
         emailSubjectTemplate: 'ثبت پاسخ جدید در {form_title}',
         includeSubmissionSummary: true,
+        webhookEnabled: false,
+        webhookUrl: '',
+        webhookSecret: '',
+        webhookIncludeMetadata: true,
       },
       createdAt: now,
       updatedAt: now,
@@ -588,6 +592,8 @@ class DatabaseService {
     emailNotified?: boolean;
     notificationEmail?: string;
     emailSummary?: { to: string; subject: string; itemsCount: number };
+    webhookDispatched?: boolean;
+    webhookUrl?: string;
   } {
     const form = this.getFormById(formId);
     if (!form) {
@@ -689,6 +695,80 @@ class DatabaseService {
       );
     }
 
+    // Webhook Integration Processing
+    const webhookConfigured = Boolean(
+      form.settings?.webhookEnabled && form.settings?.webhookUrl?.trim()
+    );
+
+    if (webhookConfigured && form.settings?.webhookUrl) {
+      const targetUrl = form.settings.webhookUrl.trim();
+      const includeMeta = form.settings.webhookIncludeMetadata !== false;
+
+      const webhookPayload = {
+        event: 'form_response.submitted',
+        timestamp: new Date().toISOString(),
+        form: {
+          id: form.id,
+          title: form.title,
+          slug: form.slug,
+        },
+        response: {
+          id: newResponse.id,
+          trackingCode,
+          submittedAt: newResponse.submittedAt,
+          submittedAtTimestamp: now,
+          ipAddress: includeMeta ? clientIp : undefined,
+          values: sanitizedValues,
+          fields: form.fields
+            .filter((f) => f.type !== 'divider' && f.type !== 'static_text')
+            .map((f) => ({
+              id: f.id,
+              name: f.name,
+              label: f.label,
+              type: f.type,
+              value: sanitizedValues[f.name] !== undefined ? sanitizedValues[f.name] : null,
+            })),
+        },
+      };
+
+      try {
+        fetch('/api/webhook/dispatch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            url: targetUrl,
+            secret: form.settings.webhookSecret || '',
+            payload: webhookPayload,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              this.logAction(
+                'ارسال موفق وب‌هوک',
+                `پاسخ کاربر (کد ${trackingCode}) با موفقیت به «${targetUrl}» با وضعیت HTTP ${data.status} مخابره شد.`,
+                'success'
+              );
+            } else {
+              this.logAction(
+                'خطا در ارسال وب‌هوک',
+                `ارسال به وب‌هوک «${targetUrl}» با خطا مواجه شد: ${data.error || data.statusText || 'خطای اتصال'}`,
+                'warning'
+              );
+            }
+          })
+          .catch((err) => {
+            this.logAction(
+              'خطا در وب‌هوک',
+              `عدم برقراری ارتباط با وب‌هوک «${targetUrl}»: ${err.message}`,
+              'warning'
+            );
+          });
+      } catch (err: any) {
+        console.warn('Webhook dispatch call error:', err);
+      }
+    }
+
     return {
       success: true,
       trackingCode,
@@ -696,6 +776,53 @@ class DatabaseService {
       emailNotified,
       notificationEmail: form.settings?.notificationEmail,
       emailSummary: emailSummaryData,
+      webhookDispatched: webhookConfigured,
+      webhookUrl: form.settings?.webhookUrl,
+    };
+  }
+
+  /**
+   * Helper to generate a live sample Webhook payload preview for a form
+   */
+  public generateWebhookPayloadPreview(form: Form): Record<string, any> {
+    const sampleValues: Record<string, any> = {};
+    form.fields
+      .filter((f) => f.type !== 'divider' && f.type !== 'static_text')
+      .forEach((f) => {
+        if (f.type === 'email') sampleValues[f.name] = 'user@example.com';
+        else if (f.type === 'phone') sampleValues[f.name] = '09123456789';
+        else if (f.type === 'number') sampleValues[f.name] = 25;
+        else if (f.type === 'date') sampleValues[f.name] = '1403/07/15';
+        else if (f.type === 'checkbox') sampleValues[f.name] = true;
+        else if (f.type === 'star_rating') sampleValues[f.name] = 5;
+        else sampleValues[f.name] = f.defaultValue || `نمونه ${f.label}`;
+      });
+
+    return {
+      event: 'form_response.submitted',
+      timestamp: new Date().toISOString(),
+      form: {
+        id: form.id,
+        title: form.title,
+        slug: form.slug,
+      },
+      response: {
+        id: 'resp-sample-1001',
+        trackingCode: 'TRK-WEBHOOK-842',
+        submittedAt: '۱۴۰۳/۰۷/۱۵ ساعت ۱۰:۳۰',
+        submittedAtTimestamp: Date.now(),
+        ipAddress: '192.168.1.1',
+        values: sampleValues,
+        fields: form.fields
+          .filter((f) => f.type !== 'divider' && f.type !== 'static_text')
+          .map((f) => ({
+            id: f.id,
+            name: f.name,
+            label: f.label,
+            type: f.type,
+            value: sampleValues[f.name],
+          })),
+      },
     };
   }
 

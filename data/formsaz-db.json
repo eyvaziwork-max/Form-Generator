@@ -1,0 +1,338 @@
+{
+  "forms": [
+    {
+      "id": "form-student-reg-01",
+      "title": "فرم ثبت اطلاعات دانشجویان",
+      "description": "لطفاً اطلاعات هویتی و تحصیلی خود را با دقت در فرم زیر ثبت نمایید تا در سامانه یکپارچه دانشگاه ذخیره گردد.",
+      "slug": "student-registration",
+      "status": "active",
+      "createdAt": "2026-10-01T08:43:32.747Z",
+      "updatedAt": "2026-10-08T08:43:32.747Z",
+      "responseCount": 6,
+      "lastResponseAt": "2026-10-08T08:44:15.927Z",
+      "settings": {
+        "title": "فرم ثبت اطلاعات دانشجویان",
+        "description": "لطفاً مشخصات فردی و دانشجویی خود را با دقت در فرم زیر ثبت فرمایید.",
+        "slug": "student-registration",
+        "status": "active",
+        "successMessage": "اطلاعات دانشجویی شما با موفقیت در سامانه ثبت شد. کد پیگیری شما برای مراجعات بعدی معتبر است.",
+        "maxResponses": 200,
+        "enableCaptcha": false,
+        "allowMultipleSubmissions": true,
+        "themeColor": "#4f46e5",
+        "emailNotificationEnabled": true,
+        "notificationEmail": "admin@university.ac.ir",
+        "emailSubjectTemplate": "ثبت پاسخ جدید در فرم {form_title} (کد: {tracking_code})",
+        "includeSubmissionSummary": true,
+        "webhookEnabled": false,
+        "webhookUrl": "",
+        "webhookSecret": "",
+        "webhookIncludeMetadata": true
+      },
+      "fields": [
+        {
+          "id": "f-first-name",
+          "type": "text",
+          "label": "نام",
+          "name": "first_name",
+          "placeholder": "مثال: علی",
+          "description": "نام کوچک خود را مطابق با شناسنامه وارد نمایید.",
+          "required": true,
+          "active": true,
+          "order": 1,
+          "minLength": 2,
+          "maxLength": 30,
+          "customErrorMessage": "لطفاً نام خود را به صورت کامل وارد کنید (حداقل ۲ حرف)."
+        },
+        {
+          "id": "f-last-name",
+          "type": "text",
+          "label": "نام خانوادگی",
+          "name": "last_name",
+          "placeholder": "مثال: احمدی",
+          "description": "نام خانوادگی خود را مطابق با شناسنامه وارد نمایید.",
+          "required": true,
+          "active": true,
+          "order": 2,
+          "minLength": 2,
+          "maxLength": 40,
+          "customErrorMessage": "لطفاً نام خانوادگی خود را وارد نمایید."
+        },
+        {
+          "id": "f-student-id",
+          "type": "student_id",
+          "label": "شماره دانشجویی",
+          "name": "student_id",
+          "placeholder": "مثال: 40112345",
+          "description": "شماره دانشجویی رسمی دانشگاه (بین ۵ الی ۱۲ رقم عددی)",
+          "required": true,
+          "active": true,
+          "order": 3,
+          "minLength": 5,
+          "maxLength": 12,
+          "regexPattern": "^[0-9]{5,12}$",
+          "customErrorMessage": "شماره دانشجویی نامعتبر است (فقط اعداد بین ۵ تا ۱۲ رقم)."
+        },
+        {
+          "id": "f-phone",
+          "type": "phone",
+          "label": "شماره موبایل",
+          "name": "phone",
+          "placeholder": "مثال: 09123456789",
+          "description": "شماره موبایل جهت ارسال پیامک تأییدیه و اطلاعیه‌ها",
+          "required": true,
+          "active": true,
+          "order": 4,
+          "minLength": 11,
+          "maxLength": 11,
+          "regexPattern": "^09[0-9]{9}$",
+          "customErrorMessage": "شماره موبایل باید ۱۱ رقم بوده و با ۰۹ شروع شود."
+        }
+      ]
+    },
+    {
+      "id": "form-survey-course-02",
+      "title": "ارزیابی کیفیت آموزشی و کارگاه‌های تخصصی",
+      "description": "نظرسنجی رسمی پایان ترم جهت ارتقای سطح کیفی اساتید و دوره‌های دانشگاهی",
+      "slug": "course-evaluation",
+      "status": "active",
+      "createdAt": "2026-10-05T08:43:32.747Z",
+      "updatedAt": "2026-10-08T08:43:32.747Z",
+      "responseCount": 2,
+      "lastResponseAt": "2026-10-08T06:43:32.747Z",
+      "settings": {
+        "title": "ارزیابی کیفیت آموزشی و کارگاه‌های تخصصی",
+        "description": "نظرسنجی پایان ترم",
+        "slug": "course-evaluation",
+        "status": "active",
+        "successMessage": "با تشکر از مشارکت شما در بهبود فرآیندهای آموزشی دانشگاه.",
+        "enableCaptcha": false,
+        "allowMultipleSubmissions": false,
+        "themeColor": "#059669"
+      },
+      "fields": [
+        {
+          "id": "f-course-name",
+          "type": "select",
+          "label": "عنوان دوره / کارگاه",
+          "name": "course_name",
+          "required": true,
+          "active": true,
+          "order": 1,
+          "options": [
+            {
+              "id": "opt-1",
+              "label": "طراحی رابط کاربری پیشرفته",
+              "value": "ui_design"
+            },
+            {
+              "id": "opt-2",
+              "label": "توسعه وب فول‌استک با ری‌اکت و نودجی‌اس",
+              "value": "fullstack_web"
+            },
+            {
+              "id": "opt-3",
+              "label": "هوش مصنوعی و یادگیری ماشین",
+              "value": "ai_ml"
+            }
+          ]
+        },
+        {
+          "id": "f-satisfaction",
+          "type": "star_rating",
+          "label": "میزان رضایت کلی از تدریس استاد",
+          "name": "satisfaction_rating",
+          "required": true,
+          "active": true,
+          "order": 2
+        },
+        {
+          "id": "f-feedback",
+          "type": "textarea",
+          "label": "پیشنهادات و انتقادات سازنده",
+          "name": "feedback_text",
+          "placeholder": "نکات مثبت و نقاط قابل بهبود دوره را بنویسید...",
+          "required": false,
+          "active": true,
+          "order": 3
+        }
+      ]
+    }
+  ],
+  "responses": [
+    {
+      "id": "resp-1791449055927-270",
+      "formId": "form-student-reg-01",
+      "formTitle": "فرم ثبت اطلاعات دانشجویان",
+      "trackingCode": "TRK-973095",
+      "values": {
+        "first_name": "نیما",
+        "last_name": "یوشیج",
+        "student_id": "40398765",
+        "phone": "09121234567"
+      },
+      "formattedValues": [
+        {
+          "fieldId": "f-first-name",
+          "fieldName": "first_name",
+          "fieldLabel": "نام",
+          "value": "نیما"
+        },
+        {
+          "fieldId": "f-last-name",
+          "fieldName": "last_name",
+          "fieldLabel": "نام خانوادگی",
+          "value": "یوشیج"
+        },
+        {
+          "fieldId": "f-student-id",
+          "fieldName": "student_id",
+          "fieldLabel": "شماره دانشجویی",
+          "value": "40398765"
+        },
+        {
+          "fieldId": "f-phone",
+          "fieldName": "phone",
+          "fieldLabel": "شماره موبایل",
+          "value": "09121234567"
+        }
+      ],
+      "ipAddress": "127.0.0.1",
+      "submittedAt": "۱۶ مهر ۱۴۰۵ ساعت ۰۸:۴۴",
+      "submittedAtTimestamp": 1791449055927
+    },
+    {
+      "id": "resp-std-001",
+      "formId": "form-student-reg-01",
+      "formTitle": "فرم ثبت اطلاعات دانشجویان",
+      "trackingCode": "TRK-491024",
+      "ipAddress": "192.168.1.104",
+      "submittedAt": "۱۲ مهر ۱۴۰۵ ساعت ۰۸:۴۳",
+      "submittedAtTimestamp": 1791103412832,
+      "values": {
+        "first_name": "علی",
+        "last_name": "احمدی",
+        "student_id": "40114021",
+        "phone": "09123456789"
+      }
+    },
+    {
+      "id": "resp-std-002",
+      "formId": "form-student-reg-01",
+      "formTitle": "فرم ثبت اطلاعات دانشجویان",
+      "trackingCode": "TRK-782190",
+      "ipAddress": "192.168.1.115",
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۰۸:۴۳",
+      "submittedAtTimestamp": 1791189812833,
+      "values": {
+        "first_name": "فاطمه زهرا",
+        "last_name": "حسینی",
+        "student_id": "40221890",
+        "phone": "09359876543"
+      }
+    },
+    {
+      "id": "resp-std-003",
+      "formId": "form-student-reg-01",
+      "formTitle": "فرم ثبت اطلاعات دانشجویان",
+      "trackingCode": "TRK-315892",
+      "ipAddress": "192.168.1.120",
+      "submittedAt": "۱۴ مهر ۱۴۰۵ ساعت ۰۸:۴۳",
+      "submittedAtTimestamp": 1791276212833,
+      "values": {
+        "first_name": "محمد",
+        "last_name": "محمدی",
+        "student_id": "40033012",
+        "phone": "09191112233"
+      }
+    },
+    {
+      "id": "resp-std-004",
+      "formId": "form-student-reg-01",
+      "formTitle": "فرم ثبت اطلاعات دانشجویان",
+      "trackingCode": "TRK-904123",
+      "ipAddress": "192.168.1.140",
+      "submittedAt": "۱۵ مهر ۱۴۰۵ ساعت ۰۸:۴۳",
+      "submittedAtTimestamp": 1791362612833,
+      "values": {
+        "first_name": "سارا",
+        "last_name": "رضایی",
+        "student_id": "40125544",
+        "phone": "09184445566"
+      }
+    },
+    {
+      "id": "resp-std-005",
+      "formId": "form-student-reg-01",
+      "formTitle": "فرم ثبت اطلاعات دانشجویان",
+      "trackingCode": "TRK-618742",
+      "ipAddress": "192.168.1.155",
+      "submittedAt": "۱۶ مهر ۱۴۰۵ ساعت ۰۷:۴۳",
+      "submittedAtTimestamp": 1791445412833,
+      "values": {
+        "first_name": "امیرحسین",
+        "last_name": "کریمی",
+        "student_id": "40210987",
+        "phone": "09367778899"
+      }
+    }
+  ],
+  "logs": [
+    {
+      "id": "log-1791449324601-334",
+      "action": "حذف فرم",
+      "details": "فرم \"فرم تستی آزمایشی API\" و کلیه پاسخ‌های آن حذف گردید.",
+      "timestamp": "۱۶ مهر ۱۴۰۵ ساعت ۰۸:۴۸",
+      "type": "warning"
+    },
+    {
+      "id": "log-1791449324591-842",
+      "action": "ثبت پاسخ جدید",
+      "details": "پاسخ جدید در فرم \"فرم تستی آزمایشی API\" با کد رهگیری TRK-346479 ثبت شد.",
+      "timestamp": "۱۶ مهر ۱۴۰۵ ساعت ۰۸:۴۸",
+      "type": "success"
+    },
+    {
+      "id": "log-1791449324582-276",
+      "action": "ایجاد فرم جدید",
+      "details": "فرم \"فرم تستی آزمایشی API\" در سامانه تعریف شد.",
+      "timestamp": "۱۶ مهر ۱۴۰۵ ساعت ۰۸:۴۸",
+      "type": "success"
+    },
+    {
+      "id": "log-1791449055928-754",
+      "action": "اطلاع‌رسانی ایمیل",
+      "details": "اعلان ثبت پاسخ به admin@university.ac.ir ارسال شد.",
+      "timestamp": "۱۶ مهر ۱۴۰۵ ساعت ۰۸:۴۴",
+      "type": "info"
+    },
+    {
+      "id": "log-1791449055927-855",
+      "action": "ثبت پاسخ جدید",
+      "details": "پاسخ جدید در فرم \"فرم ثبت اطلاعات دانشجویان\" با کد رهگیری TRK-973095 ثبت شد.",
+      "timestamp": "۱۶ مهر ۱۴۰۵ ساعت ۰۸:۴۴",
+      "type": "success"
+    },
+    {
+      "id": "log-1",
+      "action": "ایجاد فرم اولیه",
+      "details": "فرم ثبت اطلاعات دانشجویان توسط مدیر سیستم ایجاد شد.",
+      "timestamp": "۹ مهر ۱۴۰۵ ساعت ۰۸:۴۳",
+      "type": "success"
+    },
+    {
+      "id": "log-2",
+      "action": "تأیید فیلدهای فرم",
+      "details": "فیلدهای نام، نام خانوادگی، شماره دانشجویی و شماره موبایل تنظیم شدند.",
+      "timestamp": "۹ مهر ۱۴۰۵ ساعت ۰۸:۴۳",
+      "type": "info"
+    },
+    {
+      "id": "log-3",
+      "action": "ثبت پاسخ جدید",
+      "details": "پاسخ دانشجو امیرحسین کریمی با موفقیت ثبت شد.",
+      "timestamp": "۱۶ مهر ۱۴۰۵ ساعت ۰۷:۴۳",
+      "type": "success"
+    }
+  ]
+}

@@ -10,13 +10,14 @@ import {
   ShieldCheck,
   Sun,
   Moon,
+  Code2,
 } from 'lucide-react';
 import { Form } from '../../types/form';
 import { useTheme } from '../../context/ThemeContext';
 
 interface HeaderProps {
-  currentTab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'public';
-  setCurrentTab: (tab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'public') => void;
+  currentTab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'public' | 'api-docs';
+  setCurrentTab: (tab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'public' | 'api-docs') => void;
   forms: Form[];
   selectedFormId: string;
   setSelectedFormId: (id: string) => void;
@@ -103,6 +104,21 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <FileSpreadsheet className="w-4 h-4" />
               پاسخ‌ها و گزارش‌ها
+            </button>
+
+            <button
+              onClick={() => setCurrentTab('api-docs')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                currentTab === 'api-docs'
+                  ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50'
+              }`}
+            >
+              <Code2 className="w-4 h-4" />
+              مستندات API
+              <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 font-mono font-bold">
+                Swagger
+              </span>
             </button>
           </nav>
 
@@ -209,6 +225,15 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <FileSpreadsheet className="w-4 h-4" />
             پاسخ‌ها
+          </button>
+          <button
+            onClick={() => setCurrentTab('api-docs')}
+            className={`flex flex-col items-center gap-1 py-1 ${
+              currentTab === 'api-docs' ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-slate-600 dark:text-slate-400'
+            }`}
+          >
+            <Code2 className="w-4 h-4" />
+            Swagger
           </button>
         </div>
       </div>

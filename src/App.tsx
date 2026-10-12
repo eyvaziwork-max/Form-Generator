@@ -13,12 +13,13 @@ import { ResponsesView } from './components/responses/ResponsesView';
 import { PublicFormView } from './components/renderer/PublicFormView';
 import { FormRenderer } from './components/renderer/FormRenderer';
 import { ApiDocsView } from './components/docs/ApiDocsView';
+import { SurveyMainView } from './components/survey/SurveyMainView';
 import { Form, FormResponse, DashboardStats, AuditLog } from './types/form';
 import { dbService } from './services/db';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<
-    'dashboard' | 'forms' | 'builder' | 'responses' | 'public' | 'api-docs'
+    'dashboard' | 'forms' | 'builder' | 'responses' | 'surveys' | 'public' | 'api-docs'
   >('dashboard');
 
   const [forms, setForms] = useState<Form[]>([]);
@@ -98,7 +99,12 @@ export default function App() {
         setIsUserOnlyMode(true);
       } else {
         const tabParam = params.get('tab');
-        if (tabParam === 'docs' || tabParam === 'swagger' || tabParam === 'api-docs') {
+        const surveyParam = params.get('survey') || params.get('s');
+        const unitParam = params.get('unit') || params.get('u');
+
+        if (surveyParam || unitParam || tabParam === 'survey' || tabParam === 'surveys') {
+          setCurrentTab('surveys');
+        } else if (tabParam === 'docs' || tabParam === 'swagger' || tabParam === 'api-docs') {
           setCurrentTab('api-docs');
         }
       }
@@ -380,6 +386,7 @@ export default function App() {
                 }}
                 onOpenShare={(f) => setShareModalForm(f)}
                 onOpenApiDocs={() => setCurrentTab('api-docs')}
+                onOpenSurveys={() => setCurrentTab('surveys')}
               />
             )}
 
@@ -438,6 +445,10 @@ export default function App() {
                 onClearAllResponses={handleClearAllResponses}
                 onShowToast={showToast}
               />
+            )}
+
+            {currentTab === 'surveys' && (
+              <SurveyMainView onShowToast={showToast} />
             )}
 
             {currentTab === 'api-docs' && (

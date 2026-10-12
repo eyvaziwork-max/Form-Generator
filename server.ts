@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI, Type } from '@google/genai';
 import { serverStorage } from './src/server/storage.js';
+import { surveyStorage } from './src/server/surveyStorage.js';
 import { openApiSpec, getSwaggerHtml } from './src/server/swaggerSpec.js';
 
 dotenv.config();
@@ -787,6 +788,257 @@ app.post('/api/webhook/test', async (req, res) => {
       error: error?.message || 'برقراری ارتباط با وب‌هوک با خطا یا وقفه زمانی (Timeout) مواجه شد.',
       durationMs,
     });
+  }
+});
+
+// ==========================================
+// SURVEY MANAGEMENT & ORGANIZATIONAL APIS
+// ==========================================
+
+// 1. Organizational Units APIs
+app.get('/api/surveys/units', (req, res) => {
+  try {
+    const { search, parentId } = req.query as { search?: string; parentId?: string };
+    const units = surveyStorage.getUnits({
+      search,
+      parentId: parentId !== undefined ? (parentId === 'null' ? null : parentId) : undefined,
+    });
+    return res.json({ success: true, count: units.length, data: units });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در واکشی ساختار سازمانی.' });
+  }
+});
+
+app.get('/api/surveys/units/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const unit = surveyStorage.getUnitById(id);
+    if (!unit) {
+      return res.status(404).json({ success: false, error: 'واحد سازمانی مورد نظر یافت نشد.' });
+    }
+    return res.json({ success: true, data: unit });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در دریافت مشخصات واحد سازمانی.' });
+  }
+});
+
+app.get('/api/surveys/units/:id/surveys', (req, res) => {
+  try {
+    const { id } = req.params;
+    const unit = surveyStorage.getUnitById(id);
+    if (!unit) {
+      return res.status(404).json({ success: false, error: 'واحد سازمانی یافت نشد.' });
+    }
+    const surveys = surveyStorage.getSurveysForUnit(unit.id);
+    return res.json({ success: true, data: { unit, surveys } });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در واکشی نظرسنجی‌های واحد.' });
+  }
+});
+
+app.post('/api/surveys/units', (req, res) => {
+  try {
+    const unitData = req.body;
+    if (!unitData.name) {
+      return res.status(400).json({ success: false, error: 'نام واحد سازمانی الزامی است.' });
+    }
+    const created = surveyStorage.createUnit(unitData);
+    return res.status(201).json({ success: true, message: 'واحد سازمانی با موفقیت ایجاد گردید.', data: created });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در ایجاد واحد سازمانی.' });
+  }
+});
+
+app.put('/api/surveys/units/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const updated = surveyStorage.updateUnit(id, req.body);
+    if (!updated) {
+      return res.status(404).json({ success: false, error: 'واحد سازمانی یافت نشد.' });
+    }
+    return res.json({ success: true, message: 'اطلاعات واحد سازمانی به‌روزرسانی شد.', data: updated });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در به‌روزرسانی واحد.' });
+  }
+});
+
+app.delete('/api/surveys/units/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { transferChildrenToId } = req.query as { transferChildrenToId?: string };
+    const result = surveyStorage.deleteUnit(id, { transferChildrenToId: transferChildrenToId || null });
+    if (!result.success) {
+      return res.status(400).json(result);
+    }
+    return res.json(result);
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در حذف واحد سازمانی.' });
+  }
+});
+
+app.post('/api/surveys/units/reorder', (req, res) => {
+  try {
+    const { orderedIds } = req.body;
+    if (!Array.isArray(orderedIds)) {
+      return res.status(400).json({ success: false, error: 'لیست شناسه‌ها نامعتبر است.' });
+    }
+    surveyStorage.reorderUnits(orderedIds);
+    return res.json({ success: true, message: 'ترتیب واحدها به‌روزرسانی شد.' });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در مرتب‌سازی.' });
+  }
+});
+
+// 2. Surveys CRUD APIs
+app.get('/api/surveys', (req, res) => {
+  try {
+    const { unitId, status, search } = req.query as { unitId?: string; status?: string; search?: string };
+    const surveys = surveyStorage.getSurveys({ unitId, status, search });
+    return res.json({ success: true, count: surveys.length, data: surveys });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در واکشی نظرسنجی‌ها.' });
+  }
+});
+
+app.post('/api/surveys', (req, res) => {
+  try {
+    const surveyData = req.body;
+    if (!surveyData.title) {
+      return res.status(400).json({ success: false, error: 'عنوان نظرسنجی الزامی است.' });
+    }
+    const created = surveyStorage.createSurvey(surveyData);
+    return res.status(201).json({ success: true, message: 'نظرسنجی جدید با موفقیت ایجاد شد.', data: created });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در ایجاد نظرسنجی.' });
+  }
+});
+
+app.get('/api/surveys/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const survey = surveyStorage.getSurveyById(id);
+    if (!survey) {
+      return res.status(404).json({ success: false, error: 'نظرسنجی مورد نظر یافت نشد.' });
+    }
+    return res.json({ success: true, data: survey });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در دریافت نظرسنجی.' });
+  }
+});
+
+app.put('/api/surveys/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const updated = surveyStorage.updateSurvey(id, req.body);
+    if (!updated) {
+      return res.status(404).json({ success: false, error: 'نظرسنجی یافت نشد.' });
+    }
+    return res.json({ success: true, message: 'تغییرات نظرسنجی ذخیره گردید.', data: updated });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در ذخیره نظرسنجی.' });
+  }
+});
+
+app.delete('/api/surveys/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = surveyStorage.deleteSurvey(id);
+    if (!deleted) {
+      return res.status(404).json({ success: false, error: 'نظرسنجی یافت نشد.' });
+    }
+    return res.json({ success: true, message: 'نظرسنجی و پاسخ‌های مربوطه حذف شدند.' });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در حذف نظرسنجی.' });
+  }
+});
+
+app.post('/api/surveys/:id/clone', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { newTitle } = req.body;
+    const cloned = surveyStorage.cloneSurvey(id, newTitle);
+    if (!cloned) {
+      return res.status(404).json({ success: false, error: 'نظرسنجی اصلی یافت نشد.' });
+    }
+    return res.status(201).json({ success: true, message: 'نسخه جدید با موفقیت ایجاد گردید.', data: cloned });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در تکثیر نظرسنجی.' });
+  }
+});
+
+app.patch('/api/surveys/:id/status', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (!['draft', 'active', 'paused', 'archived'].includes(status)) {
+      return res.status(400).json({ success: false, error: 'وضعیت نامعتبر است.' });
+    }
+    const updated = surveyStorage.updateSurvey(id, { status });
+    if (!updated) return res.status(404).json({ success: false, error: 'نظرسنجی یافت نشد.' });
+    return res.json({ success: true, message: 'وضعیت نظرسنجی تغییر یافت.', data: updated });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در تغییر وضعیت.' });
+  }
+});
+
+// 3. Survey Submissions & Responses APIs
+app.post('/api/surveys/:id/submit', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { unitId, answers, respondent } = req.body;
+    if (!unitId || !answers || typeof answers !== 'object') {
+      return res.status(400).json({ success: false, message: 'شناسه واحد سازمانی و پاسخ‌های ارسالی الزامی هستند.' });
+    }
+    const result = await surveyStorage.submitSurveyResponse(id, {
+      unitId,
+      answers,
+      respondent,
+    });
+    if (!result.success) {
+      return res.status(400).json(result);
+    }
+    return res.json(result);
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: 'خطا در ثبت پاسخ نظرسنجی.' });
+  }
+});
+
+app.get('/api/surveys/:id/responses', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { unitId, periodId, search } = req.query as { unitId?: string; periodId?: string; search?: string };
+    const responses = surveyStorage.getResponses({ surveyId: id, unitId, periodId, search });
+    return res.json({ success: true, total: responses.length, data: responses });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در دریافت پاسخ‌ها.' });
+  }
+});
+
+app.get('/api/surveys/:id/analytics', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { unitId, periodId } = req.query as { unitId?: string; periodId?: string };
+    const analytics = surveyStorage.getSurveyAnalytics(id, unitId, periodId);
+    if (!analytics) {
+      return res.status(404).json({ success: false, error: 'نظرسنجی یافت نشد.' });
+    }
+    return res.json({ success: true, data: analytics });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در محاسبه آمار تحلیلی.' });
+  }
+});
+
+app.get('/api/surveys/:id/export/csv', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { unitId } = req.query as { unitId?: string };
+    const csvContent = surveyStorage.exportSurveyResponsesCSV(id, unitId);
+    const filename = `survey-responses-${id}-${Date.now()}.csv`;
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"`);
+    return res.send(csvContent);
+  } catch (err: any) {
+    return res.status(500).json({ success: false, error: 'خطا در خروجی CSV.' });
   }
 });
 

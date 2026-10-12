@@ -41,6 +41,8 @@ export const openApiSpec = {
     { name: 'Logs', description: 'گزارش‌های حسابرسی و لاگ‌های رخدادهای سیستم' },
     { name: 'AI Generator', description: 'تولید هوشمند فرم با مدل‌های هوش مصنوعی Gemini' },
     { name: 'Webhooks', description: 'تست و ارسال وب‌هوک به سرویس‌های بیرونی' },
+    { name: 'Surveys', description: 'سامانه نظرسنجی، ارزیابی رضایت و تحلیل سازمانی' },
+    { name: 'Organizational Units', description: 'مدیریت سلسله‌مراتبی ساختار درختی سازمان و واحدها' },
   ],
   paths: {
     '/api/forms': {
@@ -822,6 +824,221 @@ export const openApiSpec = {
             description: 'نتیجه مخابره وب‌هوک',
           },
         },
+      },
+    },
+
+    '/api/surveys/units': {
+      get: {
+        tags: ['Organizational Units'],
+        summary: 'دریافت ساختار درختی واحدهای سازمانی',
+        description: 'فهرست شاخه‌ها و زیرشاخه‌های سازمانی (بیمارستان، بخش‌ها، امور اداری، خدمات و...) بر اساس Adjacency List',
+        parameters: [
+          { name: 'search', in: 'query', schema: { type: 'string' }, description: 'جستجو در نام واحد' },
+          { name: 'parentId', in: 'query', schema: { type: 'string' }, description: 'شناسه والد برای واکشی زیرشاخه‌ها' },
+        ],
+        responses: {
+          '200': { description: 'لیست واحدهای سازمانی' },
+        },
+      },
+      post: {
+        tags: ['Organizational Units'],
+        summary: 'ایجاد شاخه یا واحد سازمانی جدید',
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['name'],
+                properties: {
+                  name: { type: 'string', example: 'بخش جراحی قلب' },
+                  code: { type: 'string', example: 'SURG-01' },
+                  parentId: { type: 'string', example: 'unit-nurse-01' },
+                  managerName: { type: 'string', example: 'دکتر امینی' },
+                  staffCount: { type: 'integer', example: 35 },
+                  description: { type: 'string', example: 'بخش مراقبت پس از جراحی' },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          '201': { description: 'واحد با موفقیت ایجاد شد' },
+        },
+      },
+    },
+
+    '/api/surveys/units/{id}': {
+      put: {
+        tags: ['Organizational Units'],
+        summary: 'ویرایش اطلاعات واحد سازمانی',
+        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        requestBody: {
+          required: true,
+          content: { 'application/json': { schema: { type: 'object' } } },
+        },
+        responses: { '200': { description: 'واحد به‌روزرسانی شد' } },
+      },
+      delete: {
+        tags: ['Organizational Units'],
+        summary: 'حذف کنترل‌شده واحد سازمانی و انتقال زیرشاخه‌ها',
+        parameters: [
+          { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+          { name: 'transferChildrenToId', in: 'query', schema: { type: 'string' }, description: 'شناسه والد جدید برای زیرشاخه‌ها' },
+        ],
+        responses: { '200': { description: 'نتیجه حذف واحد' } },
+      },
+    },
+
+    '/api/surveys': {
+      get: {
+        tags: ['Surveys'],
+        summary: 'فهرست نظرسنجی‌های سازمانی',
+        description: 'واکشی نظرسنجی‌ها همراه با فیلتر دسترسی سازمانی (RBAC) و وضعیت',
+        parameters: [
+          { name: 'unitId', in: 'query', schema: { type: 'string' } },
+          { name: 'status', in: 'query', schema: { type: 'string', enum: ['active', 'paused', 'draft', 'archived'] } },
+          { name: 'search', in: 'query', schema: { type: 'string' } },
+        ],
+        responses: { '200': { description: 'فهرست نظرسنجی‌ها' } },
+      },
+      post: {
+        tags: ['Surveys'],
+        summary: 'ایجاد نظرسنجی جدید',
+        description: 'ساخت نظرسنجی با دسته‌بندی موضوعی، انواع سوال و تخصیص به شاخه‌ها',
+        requestBody: {
+          required: true,
+          content: { 'application/json': { schema: { type: 'object', required: ['title'] } } },
+        },
+        responses: { '201': { description: 'نظرسنجی ایجاد گردید' } },
+      },
+    },
+
+    '/api/surveys/{id}': {
+      get: {
+        tags: ['Surveys'],
+        summary: 'دریافت جزئیات کامل نظرسنجی',
+        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        responses: { '200': { description: 'اطلاعات کامل نظرسنجی' } },
+      },
+      put: {
+        tags: ['Surveys'],
+        summary: 'به‌روزرسانی ساختار و سؤالات نظرسنجی',
+        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        requestBody: {
+          required: true,
+          content: { 'application/json': { schema: { type: 'object' } } },
+        },
+        responses: { '200': { description: 'نظرسنجی ذخیره شد' } },
+      },
+      delete: {
+        tags: ['Surveys'],
+        summary: 'حذف نظرسنجی و پاسخ‌ها',
+        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        responses: { '200': { description: 'نظرسنجی حذف گردید' } },
+      },
+    },
+
+    '/api/surveys/{id}/clone': {
+      post: {
+        tags: ['Surveys'],
+        summary: 'تکثیر و ساخت رونوشت از نظرسنجی موجود',
+        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        responses: { '201': { description: 'نسخه رونوشت ایجاد شد' } },
+      },
+    },
+
+    '/api/surveys/{id}/status': {
+      patch: {
+        tags: ['Surveys'],
+        summary: 'تغییر وضعیت نظرسنجی (فعال‌سازی / توقف موقت)',
+        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['status'],
+                properties: { status: { type: 'string', enum: ['active', 'paused', 'draft', 'archived'] } },
+              },
+            },
+          },
+        },
+        responses: { '200': { description: 'وضعیت تغییر یافت' } },
+      },
+    },
+
+    '/api/surveys/{id}/submit': {
+      post: {
+        tags: ['Surveys'],
+        summary: 'ثبت پاسخ نظرسنجی با محاسبه هوشمند امتیاز رضایت',
+        description: 'ثبت پاسخ‌های پرسنل یا مراجعین، صدور کد پیگیری SRV-XXXXXX و محاسبه امتیازهای تفکیکی موضوعات',
+        parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['unitId', 'answers'],
+                properties: {
+                  unitId: { type: 'string', example: 'unit-icu-01' },
+                  answers: { type: 'object', additionalProperties: true },
+                  respondent: {
+                    type: 'object',
+                    properties: {
+                      fullName: { type: 'string' },
+                      personnelCode: { type: 'string' },
+                      jobTitle: { type: 'string' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: { '200': { description: 'پاسخ با موفقیت ثبت شد' } },
+      },
+    },
+
+    '/api/surveys/{id}/analytics': {
+      get: {
+        tags: ['Surveys'],
+        summary: 'دریافت آمار تحلیلی نظرسنجی و مقایسه واحدها',
+        description: 'شامل نرخ مشارکت، میانگین رضایت از ۵، شاخص وفاداری و رضایت NPS، مقایسه بخش‌ها، تحلیل موضوعات و روند دوره‌ها',
+        parameters: [
+          { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+          { name: 'unitId', in: 'query', schema: { type: 'string' } },
+          { name: 'periodId', in: 'query', schema: { type: 'string' } },
+        ],
+        responses: { '200': { description: 'داده‌های تحلیلی داشبورد' } },
+      },
+    },
+
+    '/api/surveys/{id}/responses': {
+      get: {
+        tags: ['Surveys'],
+        summary: 'فهرست پاسخ‌های ثبت‌شده نظرسنجی',
+        parameters: [
+          { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+          { name: 'unitId', in: 'query', schema: { type: 'string' } },
+          { name: 'periodId', in: 'query', schema: { type: 'string' } },
+          { name: 'search', in: 'query', schema: { type: 'string' } },
+        ],
+        responses: { '200': { description: 'لیست پاسخ‌ها' } },
+      },
+    },
+
+    '/api/surveys/{id}/export/csv': {
+      get: {
+        tags: ['Surveys'],
+        summary: 'دانلود خروجی CSV اکسل پاسخ‌های نظرسنجی',
+        parameters: [
+          { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+          { name: 'unitId', in: 'query', schema: { type: 'string' } },
+        ],
+        responses: { '200': { description: 'فایل CSV آماده دانلود' } },
       },
     },
   },

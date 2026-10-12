@@ -1,0 +1,5972 @@
+{
+  "units": [
+    {
+      "id": "unit-hosp-01",
+      "name": "بیمارستان تخصصی و فوق‌تخصصی نمونه",
+      "code": "HOSP-01",
+      "parentId": null,
+      "description": "مرکز آموزشی، پژوهشی و درمانی بیمارستان نمونه",
+      "managerName": "دکتر علیرضا فرهادی (رئیس بیمارستان)",
+      "staffCount": 450,
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "unit-nurse-01",
+      "name": "معاونت پرستاری و خدمات بالینی",
+      "code": "NURSE-01",
+      "parentId": "unit-hosp-01",
+      "description": "مدیریت جامع کادر پرستاری و بخش‌های مراقبت از بیمار",
+      "managerName": "خانم مریم صادقی (مترون بیمارستان)",
+      "staffCount": 220,
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "unit-icu-01",
+      "name": "بخش مراقبت‌های ویژه (ICU)",
+      "code": "ICU-01",
+      "parentId": "unit-nurse-01",
+      "description": "بخش آی‌سی‌یو جنرال و جراحی مغز و اعصاب",
+      "managerName": "خانم فاطمه سلیمانی (سرپرستار ICU)",
+      "staffCount": 45,
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "unit-ccu-01",
+      "name": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "code": "CCU-01",
+      "parentId": "unit-nurse-01",
+      "description": "بخش مراقبت از بیماران قلبی و عروقی",
+      "managerName": "آقای محمدرضا کریمی (سرپرستار CCU)",
+      "staffCount": 32,
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "unit-emg-01",
+      "name": "بخش اورژانس و تروما",
+      "code": "EMG-01",
+      "parentId": "unit-nurse-01",
+      "description": "پذیرش فوری، تریاژ و مراقبت‌های اورژانسی ۲۴ ساعته",
+      "managerName": "آقای حمید حسینی (سرپرستار اورژانس)",
+      "staffCount": 50,
+      "order": 3,
+      "isActive": true
+    },
+    {
+      "id": "unit-int-01",
+      "name": "بخش بستری داخلی",
+      "code": "INT-01",
+      "parentId": "unit-nurse-01",
+      "description": "بخش تخصصی بیماران داخلی و گوارش",
+      "managerName": "خانم زهرا نوری",
+      "staffCount": 28,
+      "order": 4,
+      "isActive": true
+    },
+    {
+      "id": "unit-surg-01",
+      "name": "بخش جراحی عمومی و تخصصی",
+      "code": "SURG-01",
+      "parentId": "unit-nurse-01",
+      "description": "بخش بستری قبل و بعد از عمل‌های جراحی",
+      "managerName": "آقای علی اکبری",
+      "staffCount": 30,
+      "order": 5,
+      "isActive": true
+    },
+    {
+      "id": "unit-ped-01",
+      "name": "بخش کودکان و اطفال",
+      "code": "PED-01",
+      "parentId": "unit-nurse-01",
+      "description": "مراقبت‌های درمانی تخصصی نوزادان و کودکان",
+      "managerName": "خانم مینا رضایی",
+      "staffCount": 20,
+      "order": 6,
+      "isActive": true
+    },
+    {
+      "id": "unit-or-01",
+      "name": "اتاق‌های عمل و بیهوشی",
+      "code": "OR-01",
+      "parentId": "unit-nurse-01",
+      "description": "مجموعه اتاق‌های عمل جنرال و لاپاراسکوپی",
+      "managerName": "آقای دکتر بهرامی",
+      "staffCount": 35,
+      "order": 7,
+      "isActive": true
+    },
+    {
+      "id": "unit-admin-01",
+      "name": "امور اداری و منابع انسانی",
+      "code": "ADMIN-01",
+      "parentId": "unit-hosp-01",
+      "description": "مدیریت امور پرسنلی، رفاهی، حقوق و دستمزد",
+      "managerName": "آقای کامران ملکی",
+      "staffCount": 65,
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "unit-hr-01",
+      "name": "مدیریت منابع انسانی و آموزش",
+      "code": "HR-01",
+      "parentId": "unit-admin-01",
+      "description": "جذب، آموزش ضمن خدمت و ارزیابی عملکرد پرسنل",
+      "managerName": "خانم الهام کاظمی",
+      "staffCount": 25,
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "unit-fin-01",
+      "name": "امور مالی و حسابداری",
+      "code": "FIN-01",
+      "parentId": "unit-admin-01",
+      "description": "حسابداری درآمد، بیمه‌گری و اسناد مالی",
+      "managerName": "آقای مسعود تهرانی",
+      "staffCount": 22,
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "unit-sec-01",
+      "name": "دبیرخانه و بایگانی اسناد",
+      "code": "SEC-01",
+      "parentId": "unit-admin-01",
+      "description": "ثبت و پیگیری مکاتبات اداری و پرونده‌ها",
+      "managerName": "خانم پریسا نجفی",
+      "staffCount": 18,
+      "order": 3,
+      "isActive": true
+    },
+    {
+      "id": "unit-svc-01",
+      "name": "خدمات و پشتیبانی عمومی",
+      "code": "SVC-01",
+      "parentId": "unit-hosp-01",
+      "description": "نظافت بهداشتی، بهداشت محیط و تأسیسات فیزیکی",
+      "managerName": "آقای اصغر مرادی",
+      "staffCount": 85,
+      "order": 3,
+      "isActive": true
+    },
+    {
+      "id": "unit-clean-01",
+      "name": "خدمات بهداشت و نظافت بیمارستان",
+      "code": "CLEAN-01",
+      "parentId": "unit-svc-01",
+      "description": "ضدعفونی بخش‌ها و بهداشت محیط درمانی",
+      "managerName": "آقای بیات",
+      "staffCount": 55,
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "unit-fac-01",
+      "name": "تأسیسات و مهندسی نگهداری",
+      "code": "FAC-01",
+      "parentId": "unit-svc-01",
+      "description": "تجهیزات تهویه، ژنراتورها، اکسیژن‌ساز و برق اضطراری",
+      "managerName": "مهندس احمد پور",
+      "staffCount": 30,
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "unit-it-01",
+      "name": "واحد فناوری اطلاعات و HIS",
+      "code": "IT-01",
+      "parentId": "unit-hosp-01",
+      "description": "پشتیبانی نرم‌افزار بیمارستانی HIS، شبکه و امنیت داده‌ها",
+      "managerName": "مهندس سعید ایزدی",
+      "staffCount": 18,
+      "order": 4,
+      "isActive": true
+    },
+    {
+      "id": "unit-rec-01",
+      "name": "پذیرش و ترخیص بیماران",
+      "code": "REC-01",
+      "parentId": "unit-hosp-01",
+      "description": "پذیرش بستری، سرپایی، صندوق و بیمه تکمیلی",
+      "managerName": "خانم ناهید طاهری",
+      "staffCount": 32,
+      "order": 5,
+      "isActive": true
+    }
+  ],
+  "surveys": [
+    {
+      "id": "survey-nursing-eval-01",
+      "title": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "description": "نظرسنجی دوره‌ای با هدف سنجش رضایت شغلی، کیفیت مدیریت سرپرستاران، کفایت تجهیزات پزشکی و بهبود شرایط محیط کاری بخش‌های بیمارستان نمونه",
+      "code": "SRV-NURSE-01",
+      "slug": "nursing-satisfaction-eval",
+      "version": 2,
+      "status": "active",
+      "allocationMode": "shared_segmented",
+      "assignedUnitIds": [
+        "unit-nurse-01",
+        "unit-icu-01",
+        "unit-ccu-01",
+        "unit-emg-01",
+        "unit-int-01",
+        "unit-surg-01",
+        "unit-ped-01",
+        "unit-or-01"
+      ],
+      "anonymityMode": "confidential",
+      "minAnonymousGroupSize": 3,
+      "targetAudience": "unit_staff",
+      "currentPeriodId": "period-fall-1405",
+      "periods": [
+        {
+          "id": "period-spring-1405",
+          "surveyId": "survey-nursing-eval-01",
+          "name": "دوره ارزیابی بهار ۱۴۰۵",
+          "code": "PER-1405-01",
+          "startDate": "2026-03-21T00:00:00Z",
+          "endDate": "2026-06-20T23:59:59Z",
+          "isActive": false,
+          "isClosed": true,
+          "responseCount": 88,
+          "avgScore": 71
+        },
+        {
+          "id": "period-summer-1405",
+          "surveyId": "survey-nursing-eval-01",
+          "name": "دوره ارزیابی تابستان ۱۴۰۵",
+          "code": "PER-1405-02",
+          "startDate": "2026-06-21T00:00:00Z",
+          "endDate": "2026-09-21T23:59:59Z",
+          "isActive": false,
+          "isClosed": true,
+          "responseCount": 104,
+          "avgScore": 75
+        },
+        {
+          "id": "period-fall-1405",
+          "surveyId": "survey-nursing-eval-01",
+          "name": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+          "code": "PER-1405-03",
+          "startDate": "2026-09-22T00:00:00Z",
+          "endDate": "2026-12-21T23:59:59Z",
+          "isActive": true,
+          "isClosed": false,
+          "responseCount": 127,
+          "avgScore": 78
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-job-sat",
+          "surveyId": "survey-nursing-eval-01",
+          "title": "رضایت شغلی و انگیزش پرسنل",
+          "description": "ارزیابی حس تعلق، رضایت از شرایط کار و تعادل زندگی-شغل",
+          "order": 1,
+          "weight": 1.2
+        },
+        {
+          "id": "sec-mgmt",
+          "surveyId": "survey-nursing-eval-01",
+          "title": "کیفیت مدیریت بالینی و سرپرستاری",
+          "description": "نحوه برنامه‌ریزی شیفت‌ها، عدالت سازمانی و حمایت سرپرستار",
+          "order": 2,
+          "weight": 1
+        },
+        {
+          "id": "sec-equip",
+          "surveyId": "survey-nursing-eval-01",
+          "title": "تجهیزات، امکانات و ایمنی بیمار",
+          "description": "کفایت داروها، دستگاه‌های ونتیلاتور و مانیتورینگ، ایمنی فردی",
+          "order": 3,
+          "weight": 1
+        },
+        {
+          "id": "sec-comm",
+          "surveyId": "survey-nursing-eval-01",
+          "title": "ارتباطات و کار تیمی بین‌رشته‌ای",
+          "description": "تعامل با پزشکان معالج، کادر خدمات و همکاران پرستار",
+          "order": 4,
+          "weight": 0.8
+        },
+        {
+          "id": "sec-feedback",
+          "surveyId": "survey-nursing-eval-01",
+          "title": "پیشنهادات سازنده و توسعه فردی",
+          "description": "بازخورد آزاد، نقاط قوت و پیشنهادهای بهبود عملکرد بیمارستان",
+          "order": 5,
+          "weight": 0.5
+        }
+      ],
+      "questions": [
+        {
+          "id": "q-sat-01",
+          "sectionId": "sec-job-sat",
+          "type": "likert",
+          "title": "میزان رضایت کلی شما از شغل پرستاری در این بخش و بیمارستان چقدر است؟",
+          "required": true,
+          "order": 1,
+          "options": [
+            {
+              "id": "opt-l1",
+              "label": "بسیار کم (ناراضی)",
+              "value": "1",
+              "score": 20
+            },
+            {
+              "id": "opt-l2",
+              "label": "کم",
+              "value": "2",
+              "score": 40
+            },
+            {
+              "id": "opt-l3",
+              "label": "متوسط",
+              "value": "3",
+              "score": 60
+            },
+            {
+              "id": "opt-l4",
+              "label": "زیاد (راضی)",
+              "value": "4",
+              "score": 80
+            },
+            {
+              "id": "opt-l5",
+              "label": "بسیار زیاد (بسیار راضی)",
+              "value": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "q-sat-02",
+          "sectionId": "sec-job-sat",
+          "type": "yes_no",
+          "title": "آیا تناسب منطقی بین حجم کار محوله با تعداد پرسنل حاضر در شیفت وجود دارد؟",
+          "description": "در صورت انتخاب «خیر»، پرسش توضیحی دلیل فشردگی شیفت نمایش داده می‌شود.",
+          "required": true,
+          "order": 2,
+          "options": [
+            {
+              "id": "opt-yn-yes",
+              "label": "بله، حجم کار متناسب است",
+              "value": "yes",
+              "score": 100
+            },
+            {
+              "id": "opt-yn-no",
+              "label": "خیر، فشار کاری بیش از ظرفیت است",
+              "value": "no",
+              "score": 30
+            }
+          ],
+          "rules": [
+            {
+              "id": "rule-sat-02-1",
+              "triggerQuestionId": "q-sat-02",
+              "operator": "equals",
+              "value": "no",
+              "action": "show",
+              "targetQuestionId": "q-sat-02-reason"
+            }
+          ]
+        },
+        {
+          "id": "q-sat-02-reason",
+          "sectionId": "sec-job-sat",
+          "type": "single_choice",
+          "title": "مهم‌ترین دلیل نامتناسب بودن فشار کاری چیست؟",
+          "required": false,
+          "order": 3,
+          "options": [
+            {
+              "id": "opt-r1",
+              "label": "کمبود شدید نیروی پرستار در شیفت",
+              "value": "staff_shortage",
+              "score": 20
+            },
+            {
+              "id": "opt-r2",
+              "label": "تعداد زیاد بیماران بدحال و پذیرش اورژانس",
+              "value": "patient_overload",
+              "score": 30
+            },
+            {
+              "id": "opt-r3",
+              "label": "حجم بالای ثبت اسناد و پرونده الکترونیک",
+              "value": "paperwork",
+              "score": 40
+            },
+            {
+              "id": "opt-r4",
+              "label": "شیفت‌های فشرده و اضافه کار اجباری",
+              "value": "forced_overtime",
+              "score": 20
+            }
+          ]
+        },
+        {
+          "id": "q-sat-03",
+          "sectionId": "sec-job-sat",
+          "type": "rating_5",
+          "title": "میزان تمایل و انگیزه شما برای ادامه خدمت در این مرکز در یک سال آینده:",
+          "required": true,
+          "order": 4,
+          "options": [
+            {
+              "id": "r5-1",
+              "label": "۱ (کاملاً متمایل به جابجایی)",
+              "value": "1",
+              "score": 20
+            },
+            {
+              "id": "r5-2",
+              "label": "۲",
+              "value": "2",
+              "score": 40
+            },
+            {
+              "id": "r5-3",
+              "label": "۳ (متوسط)",
+              "value": "3",
+              "score": 60
+            },
+            {
+              "id": "r5-4",
+              "label": "۴",
+              "value": "4",
+              "score": 80
+            },
+            {
+              "id": "r5-5",
+              "label": "۵ (کاملاً علاقه‌مند به ماندن)",
+              "value": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "q-mgmt-01",
+          "sectionId": "sec-mgmt",
+          "type": "star_rating",
+          "title": "میزان عدالت در تدوین برنامه شیفت‌های ماهانه و مرخصی‌ها توسط سرپرستار بخش:",
+          "description": "امتیاز از ۱ ستاره (بسیار ناعادلانه) تا ۵ ستاره (کاملاً عادلانه و شفاف)",
+          "required": true,
+          "order": 5
+        },
+        {
+          "id": "q-mgmt-02",
+          "sectionId": "sec-mgmt",
+          "type": "single_choice",
+          "title": "میزان پیگیری و رسیدگی مسئولین به چالش‌ها و دغدغه‌های اعلام‌شده پرسنل:",
+          "required": true,
+          "order": 6,
+          "options": [
+            {
+              "id": "m-opt-1",
+              "label": "بسیار عالی و با پیگیری مداوم",
+              "value": "excellent",
+              "score": 100
+            },
+            {
+              "id": "m-opt-2",
+              "label": "مناسب و در حد توان",
+              "value": "good",
+              "score": 75
+            },
+            {
+              "id": "m-opt-3",
+              "label": "ضعیف و با تأخیر طولانی",
+              "value": "weak",
+              "score": 40
+            },
+            {
+              "id": "m-opt-4",
+              "label": "اصلاً پیگیری نمی‌شود",
+              "value": "none",
+              "score": 10
+            }
+          ]
+        },
+        {
+          "id": "q-equip-01",
+          "sectionId": "sec-equip",
+          "type": "likert",
+          "title": "کفایت و سلامت تجهیزات پزشکی ضروری (ونتیلاتور، مانیتورینگ، الکتروشوک، پمپ سرم) در بخش شما:",
+          "required": true,
+          "order": 7,
+          "options": [
+            {
+              "id": "e-1",
+              "label": "کاملاً ناکافی و مستهلک",
+              "value": "1",
+              "score": 20
+            },
+            {
+              "id": "e-2",
+              "label": "ناکافی",
+              "value": "2",
+              "score": 40
+            },
+            {
+              "id": "e-3",
+              "label": "در حد متوسط",
+              "value": "3",
+              "score": 60
+            },
+            {
+              "id": "e-4",
+              "label": "کافی و به روز",
+              "value": "4",
+              "score": 80
+            },
+            {
+              "id": "e-5",
+              "label": "بسیار مجهز و استاندارد",
+              "value": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "q-equip-02",
+          "sectionId": "sec-equip",
+          "type": "multi_choice",
+          "title": "کدام اقلام در بخش شما بیشترین کمبود را در ماه‌های اخیر داشته‌اند؟ (امکان انتخاب چندگانه)",
+          "required": false,
+          "order": 8,
+          "options": [
+            {
+              "id": "eq-short-1",
+              "label": "تجهیزات حفاظت فردی (ماسک، گان، دستکش استاندارد)",
+              "value": "ppe"
+            },
+            {
+              "id": "eq-short-2",
+              "label": "سرم‌ها و داروهای احیا و تخصصی",
+              "value": "meds"
+            },
+            {
+              "id": "eq-short-3",
+              "label": "ست‌های پانسمان و کاتترهای عروقی",
+              "value": "consumables"
+            },
+            {
+              "id": "eq-short-4",
+              "label": "تخت‌های برقی و تشک‌های مواج استاندارد",
+              "value": "beds"
+            },
+            {
+              "id": "eq-short-5",
+              "label": "هیچ کمبودی وجود ندارد",
+              "value": "no_shortage"
+            }
+          ]
+        },
+        {
+          "id": "q-comm-01",
+          "sectionId": "sec-comm",
+          "type": "likert",
+          "title": "کیفیت همکاری و احترام متقابل بین پزشکان معالج و کادر پرستاری در بالین بیمار:",
+          "required": true,
+          "order": 9,
+          "options": [
+            {
+              "id": "c-1",
+              "label": "خیلی ضعیف و تنش‌آلود",
+              "value": "1",
+              "score": 20
+            },
+            {
+              "id": "c-2",
+              "label": "ضعیف",
+              "value": "2",
+              "score": 40
+            },
+            {
+              "id": "c-3",
+              "label": "متوسط و قابل قبول",
+              "value": "3",
+              "score": 60
+            },
+            {
+              "id": "c-4",
+              "label": "خوب و محترمانه",
+              "value": "4",
+              "score": 80
+            },
+            {
+              "id": "c-5",
+              "label": "عالی و الگوی کار تیمی",
+              "value": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "q-comm-02",
+          "sectionId": "sec-comm",
+          "type": "nps",
+          "title": "شاخص وفاداری و توصیه (NPS): تا چه حد بیمارستان نمونه را به عنوان محل کار به سایر همکاران و فارغ‌التحصیلان توصیه می‌کنید؟",
+          "description": "از ۰ (اصلاً توصیه نمی‌کنم) تا ۱۰ (قطعاً و با افتخار توصیه می‌کنم)",
+          "required": true,
+          "order": 10,
+          "min": 0,
+          "max": 10,
+          "npsLabels": {
+            "low": "اصلاً توصیه نمی‌کنم (۰)",
+            "high": "قطعاً توصیه می‌کنم (۱۰)"
+          }
+        },
+        {
+          "id": "q-feed-01",
+          "sectionId": "sec-feedback",
+          "type": "long_text",
+          "title": "مهم‌ترین پیشنهاد شما برای افزایش رضایت پرسنل و ارتقای ایمنی بیماران در بخش چیست؟",
+          "placeholder": "دیدگاه‌ها و راهکارهای اصلاحی خود را آزادانه و بدون نگرانی بنویسید (پاسخ‌ها در حالت محرمانه نگهداری می‌شوند)...",
+          "required": false,
+          "order": 11
+        }
+      ],
+      "createdAt": "2026-09-12T06:02:11.855Z",
+      "updatedAt": "2026-10-12T06:02:11.855Z",
+      "responseCount": 128,
+      "avgScore": 78,
+      "npsScore": 42
+    }
+  ],
+  "responses": [
+    {
+      "id": "sresp-1791784945377-649",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-931098",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "fullName": "پرستار بخش ICU",
+        "personnelCode": "98112",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-nurse-01": "5",
+        "q-nurse-02": "10",
+        "q-nurse-03": "5"
+      },
+      "topicScores": {
+        "sec-job-sat": 75,
+        "sec-mgmt": 75,
+        "sec-equip": 75,
+        "sec-comm": 75,
+        "sec-feedback": 75
+      },
+      "overallScore": 75,
+      "overallRating5": 3.8,
+      "submittedAt": "۲۰ مهر ۱۴۰۵ ساعت ۰۶:۰۲",
+      "submittedAtTimestamp": 1791784945377
+    },
+    {
+      "id": "sresp-1",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400001",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9101",
+        "fullName": "پرسنل کادر بالینی 1",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۲ مهر ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1791108131855
+    },
+    {
+      "id": "sresp-2",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400002",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9102",
+        "fullName": "پرسنل کادر بالینی 2",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۳ مهر ۱۴۰۵ ساعت ۲۳:۰۲",
+      "submittedAtTimestamp": 1790377331855
+    },
+    {
+      "id": "sresp-3",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400003",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9103",
+        "fullName": "پرسنل کادر بالینی 3",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "paperwork",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 90,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 67,
+      "overallRating5": 3.4,
+      "submittedAt": "۲۹ شهریور ۱۴۰۵ ساعت ۱۴:۰۲",
+      "submittedAtTimestamp": 1789912931855
+    },
+    {
+      "id": "sresp-4",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400004",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9104",
+        "fullName": "پرسنل کادر بالینی 4",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 10
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 90,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 73,
+      "overallRating5": 3.7,
+      "submittedAt": "۶ مهر ۱۴۰۵ ساعت ۰۳:۰۲",
+      "submittedAtTimestamp": 1790564531855
+    },
+    {
+      "id": "sresp-5",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400005",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9105",
+        "fullName": "پرسنل کادر بالینی 5",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۴ مهر ۱۴۰۵ ساعت ۱۳:۰۲",
+      "submittedAtTimestamp": 1790427731855
+    },
+    {
+      "id": "sresp-6",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400006",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9106",
+        "fullName": "پرسنل کادر بالینی 6",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۳ مهر ۱۴۰۵ ساعت ۲۰:۰۲",
+      "submittedAtTimestamp": 1790366531855
+    },
+    {
+      "id": "sresp-7",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400007",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9107",
+        "fullName": "پرسنل کادر بالینی 7",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 100,
+      "overallRating5": 5,
+      "submittedAt": "۸ مهر ۱۴۰۵ ساعت ۰۷:۰۲",
+      "submittedAtTimestamp": 1790751731855
+    },
+    {
+      "id": "sresp-8",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400008",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9108",
+        "fullName": "پرسنل کادر بالینی 8",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 90,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 63,
+      "overallRating5": 3.2,
+      "submittedAt": "۱۴ مهر ۱۴۰۵ ساعت ۱۲:۰۲",
+      "submittedAtTimestamp": 1791288131855
+    },
+    {
+      "id": "sresp-9",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400009",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9109",
+        "fullName": "پرسنل کادر بالینی 9",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱ مهر ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1790182931855
+    },
+    {
+      "id": "sresp-10",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400010",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9110",
+        "fullName": "پرسنل کادر بالینی 10",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۳ مهر ۱۴۰۵ ساعت ۱۸:۰۲",
+      "submittedAtTimestamp": 1790359331855
+    },
+    {
+      "id": "sresp-11",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400011",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9111",
+        "fullName": "پرسنل کادر بالینی 11",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۴ مهر ۱۴۰۵ ساعت ۱۸:۰۲",
+      "submittedAtTimestamp": 1791309731855
+    },
+    {
+      "id": "sresp-12",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400012",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9112",
+        "fullName": "پرسنل کادر بالینی 12",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 90,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 63,
+      "overallRating5": 3.2,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۰۷:۰۲",
+      "submittedAtTimestamp": 1790060531855
+    },
+    {
+      "id": "sresp-13",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400013",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9113",
+        "fullName": "پرسنل کادر بالینی 13",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۰۵:۰۲",
+      "submittedAtTimestamp": 1791694931855
+    },
+    {
+      "id": "sresp-14",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400014",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9114",
+        "fullName": "پرسنل کادر بالینی 14",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 100,
+      "overallRating5": 5,
+      "submittedAt": "۳ مهر ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1790308931855
+    },
+    {
+      "id": "sresp-15",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400015",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9115",
+        "fullName": "پرسنل کادر بالینی 15",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۶ مهر ۱۴۰۵ ساعت ۱۳:۰۲",
+      "submittedAtTimestamp": 1791464531855
+    },
+    {
+      "id": "sresp-16",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400016",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9116",
+        "fullName": "پرسنل کادر بالینی 16",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۲۹ شهریور ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1789902131855
+    },
+    {
+      "id": "sresp-17",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400017",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9117",
+        "fullName": "پرسنل کادر بالینی 17",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۷ مهر ۱۴۰۵ ساعت ۱۴:۰۲",
+      "submittedAtTimestamp": 1790690531855
+    },
+    {
+      "id": "sresp-18",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400018",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9118",
+        "fullName": "پرسنل کادر بالینی 18",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۱۵:۰۲",
+      "submittedAtTimestamp": 1791730931855
+    },
+    {
+      "id": "sresp-19",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400019",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9119",
+        "fullName": "پرسنل کادر بالینی 19",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۱۹:۰۲",
+      "submittedAtTimestamp": 1791226931855
+    },
+    {
+      "id": "sresp-20",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400020",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9120",
+        "fullName": "پرسنل کادر بالینی 20",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۹ مهر ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1790852531855
+    },
+    {
+      "id": "sresp-21",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400021",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9121",
+        "fullName": "پرسنل کادر بالینی 21",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 100,
+      "overallRating5": 5,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۰۵:۰۲",
+      "submittedAtTimestamp": 1791176531855
+    },
+    {
+      "id": "sresp-22",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400022",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9122",
+        "fullName": "پرسنل کادر بالینی 22",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 8,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 90,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 60,
+      "overallRating5": 3,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۰۷:۰۲",
+      "submittedAtTimestamp": 1791702131855
+    },
+    {
+      "id": "sresp-23",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400023",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9123",
+        "fullName": "پرسنل کادر بالینی 23",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 90,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 73,
+      "overallRating5": 3.7,
+      "submittedAt": "۱۲ مهر ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1791111731855
+    },
+    {
+      "id": "sresp-24",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400024",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9124",
+        "fullName": "پرسنل کادر بالینی 24",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1790960531855
+    },
+    {
+      "id": "sresp-25",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400025",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9125",
+        "fullName": "پرسنل کادر بالینی 25",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۲۷ شهریور ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1789729331855
+    },
+    {
+      "id": "sresp-26",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400026",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9126",
+        "fullName": "پرسنل کادر بالینی 26",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "paperwork",
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۱۹:۰۲",
+      "submittedAtTimestamp": 1791745331855
+    },
+    {
+      "id": "sresp-27",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400027",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9127",
+        "fullName": "پرسنل کادر بالینی 27",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۷ مهر ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1790654531855
+    },
+    {
+      "id": "sresp-28",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400028",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9128",
+        "fullName": "پرسنل کادر بالینی 28",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 10,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 90,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 73,
+      "overallRating5": 3.7,
+      "submittedAt": "۵ مهر ۱۴۰۵ ساعت ۰۳:۰۲",
+      "submittedAtTimestamp": 1790478131855
+    },
+    {
+      "id": "sresp-29",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400029",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9129",
+        "fullName": "پرسنل کادر بالینی 29",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۶ مهر ۱۴۰۵ ساعت ۱۹:۰۲",
+      "submittedAtTimestamp": 1790622131855
+    },
+    {
+      "id": "sresp-30",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400030",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9130",
+        "fullName": "پرسنل کادر بالینی 30",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۲۷ شهریور ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1789750931855
+    },
+    {
+      "id": "sresp-31",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400031",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9131",
+        "fullName": "پرسنل کادر بالینی 31",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۱۸:۰۲",
+      "submittedAtTimestamp": 1790100131855
+    },
+    {
+      "id": "sresp-32",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400032",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9132",
+        "fullName": "پرسنل کادر بالینی 32",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۷ مهر ۱۴۰۵ ساعت ۱۹:۰۲",
+      "submittedAtTimestamp": 1790708531855
+    },
+    {
+      "id": "sresp-33",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400033",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9133",
+        "fullName": "پرسنل کادر بالینی 33",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۱۸ مهر ۱۴۰۵ ساعت ۰۳:۰۲",
+      "submittedAtTimestamp": 1791601331855
+    },
+    {
+      "id": "sresp-34",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400034",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9134",
+        "fullName": "پرسنل کادر بالینی 34",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۵ مهر ۱۴۰۵ ساعت ۰۰:۰۲",
+      "submittedAtTimestamp": 1790467331855
+    },
+    {
+      "id": "sresp-35",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400035",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9135",
+        "fullName": "پرسنل کادر بالینی 35",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۰۱:۰۲",
+      "submittedAtTimestamp": 1791680531855
+    },
+    {
+      "id": "sresp-36",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400036",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9136",
+        "fullName": "پرسنل کادر بالینی 36",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "paperwork",
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۳ مهر ۱۴۰۵ ساعت ۱۵:۰۲",
+      "submittedAtTimestamp": 1790348531855
+    },
+    {
+      "id": "sresp-37",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400037",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9137",
+        "fullName": "پرسنل کادر بالینی 37",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "paperwork",
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۲۷ شهریور ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1789696931855
+    },
+    {
+      "id": "sresp-38",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400038",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9138",
+        "fullName": "پرسنل کادر بالینی 38",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1790938931855
+    },
+    {
+      "id": "sresp-39",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400039",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9139",
+        "fullName": "پرسنل کادر بالینی 39",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 100,
+      "overallRating5": 5,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۲۰:۰۲",
+      "submittedAtTimestamp": 1791230531855
+    },
+    {
+      "id": "sresp-40",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400040",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9140",
+        "fullName": "پرسنل کادر بالینی 40",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "4",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۵ مهر ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1791367331855
+    },
+    {
+      "id": "sresp-41",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400041",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9141",
+        "fullName": "پرسنل کادر بالینی 41",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۱۶:۰۲",
+      "submittedAtTimestamp": 1790956931855
+    },
+    {
+      "id": "sresp-42",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400042",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9142",
+        "fullName": "پرسنل کادر بالینی 42",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1791165731855
+    },
+    {
+      "id": "sresp-43",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400043",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9143",
+        "fullName": "پرسنل کادر بالینی 43",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۰۶:۰۲",
+      "submittedAtTimestamp": 1791180131855
+    },
+    {
+      "id": "sresp-44",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400044",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9144",
+        "fullName": "پرسنل کادر بالینی 44",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 10,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 100,
+      "overallRating5": 5,
+      "submittedAt": "۲۷ شهریور ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1789750931855
+    },
+    {
+      "id": "sresp-45",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-icu-01",
+      "unitName": "بخش مراقبت‌های ویژه (ICU)",
+      "trackingCode": "SRV-400045",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9145",
+        "fullName": "پرسنل کادر بالینی 45",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "5",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 90,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۸ مهر ۱۴۰۵ ساعت ۰۹:۰۲",
+      "submittedAtTimestamp": 1791622931855
+    },
+    {
+      "id": "sresp-46",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400046",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9146",
+        "fullName": "پرسنل کادر بالینی 46",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 70,
+      "overallRating5": 3.5,
+      "submittedAt": "۷ مهر ۱۴۰۵ ساعت ۰۹:۰۲",
+      "submittedAtTimestamp": 1790672531855
+    },
+    {
+      "id": "sresp-47",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400047",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9147",
+        "fullName": "پرسنل کادر بالینی 47",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۶ مهر ۱۴۰۵ ساعت ۰۳:۰۲",
+      "submittedAtTimestamp": 1790564531855
+    },
+    {
+      "id": "sresp-48",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400048",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9148",
+        "fullName": "پرسنل کادر بالینی 48",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۲۰:۰۲",
+      "submittedAtTimestamp": 1791230531855
+    },
+    {
+      "id": "sresp-49",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400049",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9149",
+        "fullName": "پرسنل کادر بالینی 49",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 9,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 70,
+      "overallRating5": 3.5,
+      "submittedAt": "۵ مهر ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1790481731855
+    },
+    {
+      "id": "sresp-50",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400050",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9150",
+        "fullName": "پرسنل کادر بالینی 50",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۲۸ شهریور ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1789790531855
+    },
+    {
+      "id": "sresp-51",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400051",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9151",
+        "fullName": "پرسنل کادر بالینی 51",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۱۲ مهر ۱۴۰۵ ساعت ۰۳:۰۲",
+      "submittedAtTimestamp": 1791082931855
+    },
+    {
+      "id": "sresp-52",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400052",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9152",
+        "fullName": "پرسنل کادر بالینی 52",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 8,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 67,
+      "overallRating5": 3.4,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1791165731855
+    },
+    {
+      "id": "sresp-53",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400053",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9153",
+        "fullName": "پرسنل کادر بالینی 53",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "paperwork",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۱ مهر ۱۴۰۵ ساعت ۱۳:۰۲",
+      "submittedAtTimestamp": 1791032531855
+    },
+    {
+      "id": "sresp-54",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400054",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9154",
+        "fullName": "پرسنل کادر بالینی 54",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۵ مهر ۱۴۰۵ ساعت ۱۴:۰۲",
+      "submittedAtTimestamp": 1790517731855
+    },
+    {
+      "id": "sresp-55",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400055",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9155",
+        "fullName": "پرسنل کادر بالینی 55",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۲۷ شهریور ۱۴۰۵ ساعت ۲۱:۰۲",
+      "submittedAtTimestamp": 1789765331855
+    },
+    {
+      "id": "sresp-56",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400056",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9156",
+        "fullName": "پرسنل کادر بالینی 56",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۱ مهر ۱۴۰۵ ساعت ۱۸:۰۲",
+      "submittedAtTimestamp": 1790186531855
+    },
+    {
+      "id": "sresp-57",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400057",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9157",
+        "fullName": "پرسنل کادر بالینی 57",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۶ مهر ۱۴۰۵ ساعت ۱۵:۰۲",
+      "submittedAtTimestamp": 1790607731855
+    },
+    {
+      "id": "sresp-58",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400058",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9158",
+        "fullName": "پرسنل کادر بالینی 58",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 9,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 63,
+      "overallRating5": 3.2,
+      "submittedAt": "۴ مهر ۱۴۰۵ ساعت ۰۸:۰۲",
+      "submittedAtTimestamp": 1790409731855
+    },
+    {
+      "id": "sresp-59",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400059",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9159",
+        "fullName": "پرسنل کادر بالینی 59",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "paperwork",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱ مهر ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1790136131855
+    },
+    {
+      "id": "sresp-60",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400060",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9160",
+        "fullName": "پرسنل کادر بالینی 60",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1790049731855
+    },
+    {
+      "id": "sresp-61",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400061",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9161",
+        "fullName": "پرسنل کادر بالینی 61",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1790906531855
+    },
+    {
+      "id": "sresp-62",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400062",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9162",
+        "fullName": "پرسنل کادر بالینی 62",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۵ مهر ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1791345731855
+    },
+    {
+      "id": "sresp-63",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400063",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9163",
+        "fullName": "پرسنل کادر بالینی 63",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۰۶:۰۲",
+      "submittedAtTimestamp": 1790920931855
+    },
+    {
+      "id": "sresp-64",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400064",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9164",
+        "fullName": "پرسنل کادر بالینی 64",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۵ مهر ۱۴۰۵ ساعت ۲۰:۰۲",
+      "submittedAtTimestamp": 1791403331855
+    },
+    {
+      "id": "sresp-65",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400065",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9165",
+        "fullName": "پرسنل کادر بالینی 65",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۲ مهر ۱۴۰۵ ساعت ۱۶:۰۲",
+      "submittedAtTimestamp": 1791129731855
+    },
+    {
+      "id": "sresp-66",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400066",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9166",
+        "fullName": "پرسنل کادر بالینی 66",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۲ مهر ۱۴۰۵ ساعت ۰۹:۰۲",
+      "submittedAtTimestamp": 1791104531855
+    },
+    {
+      "id": "sresp-67",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400067",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9167",
+        "fullName": "پرسنل کادر بالینی 67",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 63,
+      "overallRating5": 3.2,
+      "submittedAt": "۱۱ مهر ۱۴۰۵ ساعت ۲۲:۰۲",
+      "submittedAtTimestamp": 1791064931855
+    },
+    {
+      "id": "sresp-68",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400068",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9168",
+        "fullName": "پرسنل کادر بالینی 68",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۳۰ شهریور ۱۴۰۵ ساعت ۱۹:۰۲",
+      "submittedAtTimestamp": 1790017331855
+    },
+    {
+      "id": "sresp-69",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400069",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9169",
+        "fullName": "پرسنل کادر بالینی 69",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۶ مهر ۱۴۰۵ ساعت ۰۰:۰۲",
+      "submittedAtTimestamp": 1790553731855
+    },
+    {
+      "id": "sresp-70",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400070",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9170",
+        "fullName": "پرسنل کادر بالینی 70",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 8,
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 60,
+      "overallRating5": 3,
+      "submittedAt": "۷ مهر ۱۴۰۵ ساعت ۲۲:۰۲",
+      "submittedAtTimestamp": 1790719331855
+    },
+    {
+      "id": "sresp-71",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400071",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9171",
+        "fullName": "پرسنل کادر بالینی 71",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۱۹:۰۲",
+      "submittedAtTimestamp": 1791745331855
+    },
+    {
+      "id": "sresp-72",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400072",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9172",
+        "fullName": "پرسنل کادر بالینی 72",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1790096531855
+    },
+    {
+      "id": "sresp-73",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400073",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9173",
+        "fullName": "پرسنل کادر بالینی 73",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "paperwork"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۱۶ مهر ۱۴۰۵ ساعت ۱۴:۰۲",
+      "submittedAtTimestamp": 1791468131855
+    },
+    {
+      "id": "sresp-74",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400074",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9174",
+        "fullName": "پرسنل کادر بالینی 74",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۲ مهر ۱۴۰۵ ساعت ۲۰:۰۲",
+      "submittedAtTimestamp": 1790280131855
+    },
+    {
+      "id": "sresp-75",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400075",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9175",
+        "fullName": "پرسنل کادر بالینی 75",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 9,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 97,
+      "overallRating5": 4.9,
+      "submittedAt": "۲ مهر ۱۴۰۵ ساعت ۰۱:۰۲",
+      "submittedAtTimestamp": 1790211731855
+    },
+    {
+      "id": "sresp-76",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400076",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9176",
+        "fullName": "پرسنل کادر بالینی 76",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 9
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 70,
+      "overallRating5": 3.5,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1790960531855
+    },
+    {
+      "id": "sresp-77",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-ccu-01",
+      "unitName": "بخش مراقبت‌های ویژه قلبی (CCU)",
+      "trackingCode": "SRV-400077",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9177",
+        "fullName": "پرسنل کادر بالینی 77",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۴ مهر ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1790388131855
+    },
+    {
+      "id": "sresp-78",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400078",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9178",
+        "fullName": "پرسنل کادر بالینی 78",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۳۰ شهریور ۱۴۰۵ ساعت ۱۸:۰۲",
+      "submittedAtTimestamp": 1790013731855
+    },
+    {
+      "id": "sresp-79",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400079",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9179",
+        "fullName": "پرسنل کادر بالینی 79",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۴ مهر ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1790420531855
+    },
+    {
+      "id": "sresp-80",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400080",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9180",
+        "fullName": "پرسنل کادر بالینی 80",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 5,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۶ مهر ۱۴۰۵ ساعت ۲۳:۰۲",
+      "submittedAtTimestamp": 1790636531855
+    },
+    {
+      "id": "sresp-81",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400081",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9181",
+        "fullName": "پرسنل کادر بالینی 81",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 5,
+        "q-sat-02-reason": "forced_overtime",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 77,
+      "overallRating5": 3.9,
+      "submittedAt": "۲۷ شهریور ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1789696931855
+    },
+    {
+      "id": "sresp-82",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400082",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9182",
+        "fullName": "پرسنل کادر بالینی 82",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6,
+        "q-sat-02-reason": "forced_overtime"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۶ مهر ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1791453731855
+    },
+    {
+      "id": "sresp-83",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400083",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9183",
+        "fullName": "پرسنل کادر بالینی 83",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 6,
+        "q-sat-02-reason": "forced_overtime",
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 60,
+      "overallRating5": 3,
+      "submittedAt": "۷ مهر ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1790654531855
+    },
+    {
+      "id": "sresp-84",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400084",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9184",
+        "fullName": "پرسنل کادر بالینی 84",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6,
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۱۳ مهر ۱۴۰۵ ساعت ۰۸:۰۲",
+      "submittedAtTimestamp": 1791187331855
+    },
+    {
+      "id": "sresp-85",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400085",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9185",
+        "fullName": "پرسنل کادر بالینی 85",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۵ مهر ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1791367331855
+    },
+    {
+      "id": "sresp-86",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400086",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9186",
+        "fullName": "پرسنل کادر بالینی 86",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "forced_overtime",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۲۶ شهریور ۱۴۰۵ ساعت ۱۴:۰۲",
+      "submittedAtTimestamp": 1789653731855
+    },
+    {
+      "id": "sresp-87",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400087",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9187",
+        "fullName": "پرسنل کادر بالینی 87",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 77,
+      "overallRating5": 3.9,
+      "submittedAt": "۲ مهر ۱۴۰۵ ساعت ۲۲:۰۲",
+      "submittedAtTimestamp": 1790287331855
+    },
+    {
+      "id": "sresp-88",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400088",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9188",
+        "fullName": "پرسنل کادر بالینی 88",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۳۰ شهریور ۱۴۰۵ ساعت ۱۹:۰۲",
+      "submittedAtTimestamp": 1790017331855
+    },
+    {
+      "id": "sresp-89",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400089",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9189",
+        "fullName": "پرسنل کادر بالینی 89",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6,
+        "q-sat-02-reason": "forced_overtime",
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۸ مهر ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1790766131855
+    },
+    {
+      "id": "sresp-90",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400090",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9190",
+        "fullName": "پرسنل کادر بالینی 90",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "forced_overtime",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۲ مهر ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1791079331855
+    },
+    {
+      "id": "sresp-91",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400091",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9191",
+        "fullName": "پرسنل کادر بالینی 91",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۰۷:۰۲",
+      "submittedAtTimestamp": 1790924531855
+    },
+    {
+      "id": "sresp-92",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400092",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9192",
+        "fullName": "پرسنل کادر بالینی 92",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6,
+        "q-sat-02-reason": "forced_overtime"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۲ مهر ۱۴۰۵ ساعت ۰۱:۰۲",
+      "submittedAtTimestamp": 1790211731855
+    },
+    {
+      "id": "sresp-93",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400093",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9193",
+        "fullName": "پرسنل کادر بالینی 93",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۰۲:۰۲",
+      "submittedAtTimestamp": 1791684131855
+    },
+    {
+      "id": "sresp-94",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400094",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9194",
+        "fullName": "پرسنل کادر بالینی 94",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 5,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۳ مهر ۱۴۰۵ ساعت ۰۹:۰۲",
+      "submittedAtTimestamp": 1790326931855
+    },
+    {
+      "id": "sresp-95",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400095",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9195",
+        "fullName": "پرسنل کادر بالینی 95",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۰۸:۰۲",
+      "submittedAtTimestamp": 1791705731855
+    },
+    {
+      "id": "sresp-96",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400096",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9196",
+        "fullName": "پرسنل کادر بالینی 96",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۱۱ مهر ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1791021731855
+    },
+    {
+      "id": "sresp-97",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400097",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9197",
+        "fullName": "پرسنل کادر بالینی 97",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 5,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 77,
+      "overallRating5": 3.9,
+      "submittedAt": "۱۸ مهر ۱۴۰۵ ساعت ۲۰:۰۲",
+      "submittedAtTimestamp": 1791662531855
+    },
+    {
+      "id": "sresp-98",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400098",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9198",
+        "fullName": "پرسنل کادر بالینی 98",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 5,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 77,
+      "overallRating5": 3.9,
+      "submittedAt": "۱۷ مهر ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1791565331855
+    },
+    {
+      "id": "sresp-99",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400099",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9199",
+        "fullName": "پرسنل کادر بالینی 99",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱۱ مهر ۱۴۰۵ ساعت ۱۶:۰۲",
+      "submittedAtTimestamp": 1791043331855
+    },
+    {
+      "id": "sresp-100",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400100",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9200",
+        "fullName": "پرسنل کادر بالینی 100",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۱ مهر ۱۴۰۵ ساعت ۱۴:۰۲",
+      "submittedAtTimestamp": 1790172131855
+    },
+    {
+      "id": "sresp-101",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400101",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9201",
+        "fullName": "پرسنل کادر بالینی 101",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 5,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 77,
+      "overallRating5": 3.9,
+      "submittedAt": "۱۸ مهر ۱۴۰۵ ساعت ۰۷:۰۲",
+      "submittedAtTimestamp": 1791615731855
+    },
+    {
+      "id": "sresp-102",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400102",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9202",
+        "fullName": "پرسنل کادر بالینی 102",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "forced_overtime"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1790096531855
+    },
+    {
+      "id": "sresp-103",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400103",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9203",
+        "fullName": "پرسنل کادر بالینی 103",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۲۶ شهریور ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1789639331855
+    },
+    {
+      "id": "sresp-104",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400104",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9204",
+        "fullName": "پرسنل کادر بالینی 104",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۱۱ مهر ۱۴۰۵ ساعت ۰۹:۰۲",
+      "submittedAtTimestamp": 1791018131855
+    },
+    {
+      "id": "sresp-105",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400105",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9205",
+        "fullName": "پرسنل کادر بالینی 105",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "forced_overtime"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۹ مهر ۱۴۰۵ ساعت ۰۷:۰۲",
+      "submittedAtTimestamp": 1790838131855
+    },
+    {
+      "id": "sresp-106",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400106",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9206",
+        "fullName": "پرسنل کادر بالینی 106",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 5
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۲ مهر ۱۴۰۵ ساعت ۲۲:۰۲",
+      "submittedAtTimestamp": 1790287331855
+    },
+    {
+      "id": "sresp-107",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400107",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9207",
+        "fullName": "پرسنل کادر بالینی 107",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 5,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 77,
+      "overallRating5": 3.9,
+      "submittedAt": "۱۱ مهر ۱۴۰۵ ساعت ۰۰:۰۲",
+      "submittedAtTimestamp": 1790985731855
+    },
+    {
+      "id": "sresp-108",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400108",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9208",
+        "fullName": "پرسنل کادر بالینی 108",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۱۴ مهر ۱۴۰۵ ساعت ۰۹:۰۲",
+      "submittedAtTimestamp": 1791277331855
+    },
+    {
+      "id": "sresp-109",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400109",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9209",
+        "fullName": "پرسنل کادر بالینی 109",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۱۹ مهر ۱۴۰۵ ساعت ۰۰:۰۲",
+      "submittedAtTimestamp": 1791676931855
+    },
+    {
+      "id": "sresp-110",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400110",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9210",
+        "fullName": "پرسنل کادر بالینی 110",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 5,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۱۸ مهر ۱۴۰۵ ساعت ۰۶:۰۲",
+      "submittedAtTimestamp": 1791612131855
+    },
+    {
+      "id": "sresp-111",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400111",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9211",
+        "fullName": "پرسنل کادر بالینی 111",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 6,
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 53,
+      "overallRating5": 2.7,
+      "submittedAt": "۲۶ شهریور ۱۴۰۵ ساعت ۱۲:۰۲",
+      "submittedAtTimestamp": 1789646531855
+    },
+    {
+      "id": "sresp-112",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400112",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9212",
+        "fullName": "پرسنل کادر بالینی 112",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 90,
+      "overallRating5": 4.5,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۰۵:۰۲",
+      "submittedAtTimestamp": 1790917331855
+    },
+    {
+      "id": "sresp-113",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400113",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9213",
+        "fullName": "پرسنل کادر بالینی 113",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "staff_shortage",
+        "q-feed-01": "همکاری پزشکان مقیم در این بخش شایسته تقدیر است."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۲۷ شهریور ۱۴۰۵ ساعت ۱۲:۰۲",
+      "submittedAtTimestamp": 1789732931855
+    },
+    {
+      "id": "sresp-114",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400114",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9214",
+        "fullName": "پرسنل کادر بالینی 114",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "تجهیزات ونتیلاتور بخش عالی است اما نیاز به برگزاری کارگاه‌های آموزشی تخصصی دوره‌ای داریم."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 93,
+      "overallRating5": 4.7,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۲۲:۰۲",
+      "submittedAtTimestamp": 1790114531855
+    },
+    {
+      "id": "sresp-115",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400115",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9215",
+        "fullName": "پرسنل کادر بالینی 115",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-sat-02-reason": "patient_overload",
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۹ مهر ۱۴۰۵ ساعت ۰۴:۰۲",
+      "submittedAtTimestamp": 1790827331855
+    },
+    {
+      "id": "sresp-116",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400116",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9216",
+        "fullName": "پرسنل کادر بالینی 116",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 4,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۱۴ مهر ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1791280931855
+    },
+    {
+      "id": "sresp-117",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400117",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9217",
+        "fullName": "پرسنل کادر بالینی 117",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۷ مهر ۱۴۰۵ ساعت ۱۳:۰۲",
+      "submittedAtTimestamp": 1790686931855
+    },
+    {
+      "id": "sresp-118",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400118",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9218",
+        "fullName": "پرسنل کادر بالینی 118",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۱۱:۰۲",
+      "submittedAtTimestamp": 1790074931855
+    },
+    {
+      "id": "sresp-119",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400119",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9219",
+        "fullName": "پرسنل کادر بالینی 119",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "5",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۲۸ شهریور ۱۴۰۵ ساعت ۲۱:۰۲",
+      "submittedAtTimestamp": 1789851731855
+    },
+    {
+      "id": "sresp-120",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400120",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9220",
+        "fullName": "پرسنل کادر بالینی 120",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 8,
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 87,
+      "overallRating5": 4.4,
+      "submittedAt": "۲۹ شهریور ۱۴۰۵ ساعت ۲۲:۰۲",
+      "submittedAtTimestamp": 1789941731855
+    },
+    {
+      "id": "sresp-121",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400121",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9221",
+        "fullName": "پرسنل کادر بالینی 121",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 5,
+        "q-sat-02-reason": "forced_overtime",
+        "q-feed-01": "حجم بیماران تریاژ در شیفت‌های عصر بسیار سنگین است و نیاز به تزریق نیروی کمکی احساس می‌شود."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 50,
+      "overallRating5": 2.5,
+      "submittedAt": "۲۸ شهریور ۱۴۰۵ ساعت ۱۶:۰۲",
+      "submittedAtTimestamp": 1789833731855
+    },
+    {
+      "id": "sresp-122",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400122",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9222",
+        "fullName": "پرسنل کادر بالینی 122",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۱۷ مهر ۱۴۰۵ ساعت ۰۰:۰۲",
+      "submittedAtTimestamp": 1791504131855
+    },
+    {
+      "id": "sresp-123",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400123",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9223",
+        "fullName": "پرسنل کادر بالینی 123",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 5
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۳۱ شهریور ۱۴۰۵ ساعت ۲۰:۰۲",
+      "submittedAtTimestamp": 1790107331855
+    },
+    {
+      "id": "sresp-124",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400124",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9224",
+        "fullName": "پرسنل کادر بالینی 124",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "no",
+        "q-sat-03": "5",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 7,
+        "q-sat-02-reason": "staff_shortage"
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 83,
+      "overallRating5": 4.2,
+      "submittedAt": "۱۰ مهر ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1790960531855
+    },
+    {
+      "id": "sresp-125",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400125",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9225",
+        "fullName": "پرسنل کادر بالینی 125",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "2",
+        "q-sat-02": "yes",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "good",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 5,
+        "q-feed-01": "رسیدگی سریع‌تر به درخواست‌های تعویض شیفت و پرداخت به‌موقع کارانه‌ها موجب انگیزه بیشتر کادر درمان خواهد شد."
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 50,
+      "overallRating5": 2.5,
+      "submittedAt": "۲۸ شهریور ۱۴۰۵ ساعت ۱۷:۰۲",
+      "submittedAtTimestamp": 1789837331855
+    },
+    {
+      "id": "sresp-126",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400126",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9226",
+        "fullName": "پرسنل کادر بالینی 126",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "3",
+        "q-sat-02": "no",
+        "q-sat-03": "3",
+        "q-mgmt-01": 3,
+        "q-mgmt-02": "weak",
+        "q-equip-01": "3",
+        "q-equip-02": [
+          "ppe",
+          "consumables"
+        ],
+        "q-comm-01": "3",
+        "q-comm-02": 5,
+        "q-sat-02-reason": "patient_overload"
+      },
+      "topicScores": {
+        "sec-job-sat": 65,
+        "sec-mgmt": 70,
+        "sec-equip": 64,
+        "sec-comm": 72,
+        "sec-feedback": 80
+      },
+      "overallScore": 57,
+      "overallRating5": 2.9,
+      "submittedAt": "۳۰ شهریور ۱۴۰۵ ساعت ۱۰:۰۲",
+      "submittedAtTimestamp": 1789984931855
+    },
+    {
+      "id": "sresp-127",
+      "surveyId": "survey-nursing-eval-01",
+      "surveyTitle": "ارزیابی جامع رضایت شغلی و تعهد سازمانی پرسنل پرستاری",
+      "periodId": "period-fall-1405",
+      "periodName": "دوره ارزیابی پاییز ۱۴۰۵ (دوره جاری)",
+      "unitId": "unit-emg-01",
+      "unitName": "بخش اورژانس و تروما",
+      "trackingCode": "SRV-400127",
+      "anonymityMode": "confidential",
+      "respondent": {
+        "personnelCode": "EMP-9227",
+        "fullName": "پرسنل کادر بالینی 127",
+        "jobTitle": "کارشناس پرستاری"
+      },
+      "answers": {
+        "q-sat-01": "4",
+        "q-sat-02": "yes",
+        "q-sat-03": "4",
+        "q-mgmt-01": 5,
+        "q-mgmt-02": "excellent",
+        "q-equip-01": "2",
+        "q-equip-02": [
+          "no_shortage"
+        ],
+        "q-comm-01": "4",
+        "q-comm-02": 6
+      },
+      "topicScores": {
+        "sec-job-sat": 84,
+        "sec-mgmt": 88,
+        "sec-equip": 64,
+        "sec-comm": 82,
+        "sec-feedback": 80
+      },
+      "overallScore": 80,
+      "overallRating5": 4,
+      "submittedAt": "۳ مهر ۱۴۰۵ ساعت ۲۳:۰۲",
+      "submittedAtTimestamp": 1790377331855
+    }
+  ]
+}

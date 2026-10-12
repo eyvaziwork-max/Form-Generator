@@ -16,6 +16,7 @@ import {
   BarChart2,
   Share2,
   Code2,
+  ClipboardCheck,
 } from 'lucide-react';
 import { Form, DashboardStats, AuditLog } from '../../types/form';
 
@@ -29,6 +30,7 @@ interface DashboardViewProps {
   onOpenPublicForm: (formId: string) => void;
   onOpenShare?: (form: Form) => void;
   onOpenApiDocs?: () => void;
+  onOpenSurveys?: () => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
@@ -41,6 +43,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onOpenPublicForm,
   onOpenShare,
   onOpenApiDocs,
+  onOpenSurveys,
 }) => {
   // Max count for chart scale
   const maxChartCount = Math.max(...stats.recentResponsesChart.map((c) => c.count), 5);
@@ -78,6 +81,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               >
                 <ExternalLink className="w-4 h-4" />
                 مشاهده فرم دانشجویان
+              </button>
+            )}
+            {onOpenSurveys && (
+              <button
+                onClick={onOpenSurveys}
+                className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2.5 rounded-xl border border-emerald-500/40 transition-all text-sm backdrop-blur-md shadow-xs cursor-pointer"
+              >
+                <ClipboardCheck className="w-4 h-4 text-emerald-200" />
+                سامانه نظرسنجی و سازمان
               </button>
             )}
             {onOpenApiDocs && (

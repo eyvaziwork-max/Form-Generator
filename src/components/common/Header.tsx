@@ -11,13 +11,14 @@ import {
   Sun,
   Moon,
   Code2,
+  ClipboardCheck,
 } from 'lucide-react';
 import { Form } from '../../types/form';
 import { useTheme } from '../../context/ThemeContext';
 
 interface HeaderProps {
-  currentTab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'public' | 'api-docs';
-  setCurrentTab: (tab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'public' | 'api-docs') => void;
+  currentTab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'surveys' | 'public' | 'api-docs';
+  setCurrentTab: (tab: 'dashboard' | 'forms' | 'builder' | 'responses' | 'surveys' | 'public' | 'api-docs') => void;
   forms: Form[];
   selectedFormId: string;
   setSelectedFormId: (id: string) => void;
@@ -104,6 +105,18 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <FileSpreadsheet className="w-4 h-4" />
               پاسخ‌ها و گزارش‌ها
+            </button>
+
+            <button
+              onClick={() => setCurrentTab('surveys')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                currentTab === 'surveys'
+                  ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50'
+              }`}
+            >
+              <ClipboardCheck className="w-4 h-4 text-emerald-500" />
+              نظرسنجی و ارزیابی
             </button>
 
             <button
@@ -225,6 +238,15 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <FileSpreadsheet className="w-4 h-4" />
             پاسخ‌ها
+          </button>
+          <button
+            onClick={() => setCurrentTab('surveys')}
+            className={`flex flex-col items-center gap-1 py-1 ${
+              currentTab === 'surveys' ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-slate-600 dark:text-slate-400'
+            }`}
+          >
+            <ClipboardCheck className="w-4 h-4 text-emerald-500" />
+            نظرسنجی
           </button>
           <button
             onClick={() => setCurrentTab('api-docs')}

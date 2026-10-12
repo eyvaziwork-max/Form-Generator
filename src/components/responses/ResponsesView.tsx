@@ -146,24 +146,39 @@ export const ResponsesView: React.FC<ResponsesViewProps> = ({
             </button>
           </div>
 
-          {/* Form Selector Dropdown */}
-          <div className="flex items-center gap-2 bg-white dark:bg-slate-900 p-2 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-            <Layers className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0 mr-1" />
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:inline">فرم:</span>
-            <select
-              value={currentForm?.id}
-              onChange={(e) => {
-                onSelectForm(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="bg-transparent text-sm font-bold text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer max-w-[180px] truncate"
-            >
-              {forms.map((f) => (
-                <option key={f.id} value={f.id} className="dark:bg-slate-800 dark:text-slate-200">
-                  {f.title} ({responses.filter((r) => r.formId === f.id).length})
-                </option>
-              ))}
-            </select>
+          {/* Form Selector Pills (No Dropdown) */}
+          <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs overflow-x-auto max-w-full">
+            <Layers className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0 mx-1" />
+            {forms.map((f) => {
+              const isSelected = currentForm?.id === f.id;
+              const count = responses.filter((r) => r.formId === f.id).length;
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => {
+                    onSelectForm(f.id);
+                    setCurrentPage(1);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                    isSelected
+                      ? 'bg-indigo-600 text-white shadow-xs'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <span>{f.title}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-md ${
+                      isSelected
+                        ? 'bg-white/20 text-white'
+                        : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -293,6 +293,12 @@ class SurveyService {
     submission: {
       unitId: string;
       answers: Record<string, any>;
+      evaluatedStaff?: {
+        id: string;
+        fullName: string;
+        personnelCode?: string;
+        jobTitle?: string;
+      };
       respondent?: { personnelCode?: string; fullName?: string; jobTitle?: string };
     }
   ): Promise<{ success: boolean; trackingCode?: string; message: string; overallScore?: number }> {

@@ -19,6 +19,7 @@ import {
   ShieldAlert,
   QrCode,
   Link2,
+  UserCheck,
 } from 'lucide-react';
 import { OrganizationalUnit } from '../../types/survey';
 
@@ -50,6 +51,7 @@ export const OrganizationUnitsView: React.FC<OrganizationUnitsViewProps> = ({
   // Safe delete dialog
   const [deleteTargetUnit, setDeleteTargetUnit] = useState<OrganizationalUnit | null>(null);
   const [transferTargetId, setTransferTargetId] = useState<string>('null');
+  const [selectedStaffUnit, setSelectedStaffUnit] = useState<OrganizationalUnit | null>(null);
 
   // Form State
   const [name, setName] = useState('');
@@ -258,11 +260,15 @@ export const OrganizationUnitsView: React.FC<OrganizationUnitsViewProps> = ({
 
           {/* Node Metrics & Actions */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* Staff Count Pill */}
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 text-xs border border-slate-200/60 dark:border-slate-700/60">
+            {/* Staff Count Pill / Staff Modal Trigger */}
+            <button
+              onClick={() => setSelectedStaffUnit(node)}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 text-xs border border-slate-200/60 dark:border-slate-700/60 transition-colors cursor-pointer"
+              title="مشاهده کادر پرسنلی و افراد شاغل در این بخش"
+            >
               <Users className="w-3.5 h-3.5 text-indigo-500" />
-              <span>{node.staffCount} پرسنل</span>
-            </div>
+              <span>{node.staffMembers?.length || node.staffCount} پرسنل</span>
+            </button>
 
             {/* Responses Count Pill */}
             <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs border border-emerald-200/60 dark:border-emerald-800/60">
@@ -612,6 +618,88 @@ export const OrganizationUnitsView: React.FC<OrganizationUnitsViewProps> = ({
                 className="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-md shadow-rose-600/20 cursor-pointer"
               >
                 تأیید و حذف ایمن
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* 3. Unit Staff Members Modal */}
+      {selectedStaffUnit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5 animate-in zoom-in-95 max-h-[90vh] flex flex-col">
+            <div className="flex items-start justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-black text-base sm:text-lg text-slate-900 dark:text-white">
+                    کادر پرسنلی و افراد شاغل در «{selectedStaffUnit.name}»
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    کد واحد: <span className="font-mono">{selectedStaffUnit.code}</span> • مسئول بخش: {selectedStaffUnit.managerName || 'تعیین‌نشده'}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedStaffUnit(null)}
+                className="p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Staff list cards */}
+            <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
+              {(!selectedStaffUnit.staffMembers || selectedStaffUnit.staffMembers.length === 0) ? (
+                <div className="text-center py-10 space-y-2 text-slate-400">
+                  <Users className="w-8 h-8 mx-auto text-slate-300" />
+                  <p className="text-xs">هیچ فردی برای این بخش به‌صورت اختصاصی ثبت نشده است.</p>
+                </div>
+              ) : (
+                selectedStaffUnit.staffMembers.map((member) => (
+                  <div
+                    key={member.id}
+                    className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between gap-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+                        {member.fullName.charAt(0) || '👤'}
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-extrabold text-sm text-slate-900 dark:text-white">
+                            {member.fullName}
+                          </span>
+                          {member.roleInUnit && (
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold">
+                              {member.roleInUnit}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                          {member.jobTitle} • کد پرسنلی: <span className="font-mono">{member.personnelCode}</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 px-2 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60">
+                      فعال
+                    </span>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <span className="text-xs text-slate-400">
+                مجموع افراد ثبت‌شده: <strong>{selectedStaffUnit.staffMembers?.length || 0}</strong> نفر
+              </span>
+              <button
+                onClick={() => setSelectedStaffUnit(null)}
+                className="px-5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold text-xs cursor-pointer"
+              >
+                بستن
               </button>
             </div>
           </div>

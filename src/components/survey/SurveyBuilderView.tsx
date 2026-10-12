@@ -28,6 +28,8 @@ import {
   Kanban,
   LayoutList,
   GitBranch,
+  UserCheck,
+  Users,
 } from 'lucide-react';
 import {
   Survey,
@@ -683,6 +685,13 @@ export const SurveyBuilderView: React.FC<SurveyBuilderViewProps> = ({
                                 {question.required && (
                                   <span className="text-[11px] text-rose-500 font-bold">* الزامی</span>
                                 )}
+
+                                {question.isStaffSpecific && (
+                                  <span className="text-[11px] px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold border border-indigo-200 dark:border-indigo-800 flex items-center gap-1 shadow-2xs">
+                                    <UserCheck className="w-3 h-3 text-indigo-600" />
+                                    <span>ارزیابی فردی پرسنل</span>
+                                  </span>
+                                )}
                               </div>
 
                               {/* Question Title */}
@@ -1067,6 +1076,33 @@ export const SurveyBuilderView: React.FC<SurveyBuilderViewProps> = ({
                   </label>
                 </div>
 
+                {/* Staff-Specific Question Toggle */}
+                <div className="p-3 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/60 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="staffCheckEdit"
+                      checked={editingQuestion.isStaffSpecific || false}
+                      onChange={(e) => {
+                        const updated = { ...editingQuestion, isStaffSpecific: e.target.checked };
+                        setEditingQuestion(updated);
+                        setFormData((prev) => ({
+                          ...prev,
+                          questions: prev.questions.map((q) => (q.id === updated.id ? updated : q)),
+                        }));
+                      }}
+                      className="w-4 h-4 rounded-md text-indigo-600"
+                    />
+                    <label htmlFor="staffCheckEdit" className="font-bold text-xs text-indigo-950 dark:text-indigo-200 cursor-pointer flex items-center gap-1.5">
+                      <UserCheck className="w-3.5 h-3.5 text-indigo-600" />
+                      <span>این سؤال اختصاصی ارزیابی فرد انتخاب‌شده در بخش است</span>
+                    </label>
+                  </div>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 pr-6 leading-relaxed">
+                    با فعال‌سازی این گزینه، عنوان سؤال به‌صورت پویا با نام و سمت همکار انتخاب‌شده در بخش جایگزین می‌شود.
+                  </p>
+                </div>
+
                 {/* Options Editor for Choice Types */}
                 {editingQuestion.options && (
                   <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
@@ -1344,6 +1380,49 @@ export const SurveyBuilderView: React.FC<SurveyBuilderViewProps> = ({
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 className="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-slate-900 dark:text-white"
               />
+            </div>
+
+            {/* Evaluation Target Mode */}
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+              <label className="block font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Users className="w-4 h-4 text-indigo-600" />
+                <span>هدف و نوع ارزیابی پرسشنامه (Evaluation Target Mode)</span>
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {[
+                  {
+                    id: 'both',
+                    title: 'ترکیبی: واحد و پرسنل بخش',
+                    desc: 'کاربر بخش را انتخاب کرده، پرسنل مورد نظر را برمی‌گزیند و به سؤالات عمومی و فردی پاسخ می‌دهد',
+                  },
+                  {
+                    id: 'staff_evaluation',
+                    title: 'ارزیابی فردی کادر و پرسنل',
+                    desc: 'پرسشنامه اختصاصی جهت ارزیابی شایستگی و عملکرد تک‌تک افراد شاغل در بخش',
+                  },
+                  {
+                    id: 'general',
+                    title: 'ارزیابی عمومی واحد سازمانی',
+                    desc: 'نظرسنجی کلی در مورد شرایط، مدیریت و تجهیزات بخش بدون تمرکز بر فرد خاص',
+                  },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() =>
+                      setFormData({ ...formData, evaluationTargetMode: item.id as any })
+                    }
+                    className={`p-3 rounded-xl border text-right transition-all cursor-pointer ${
+                      (formData.evaluationTargetMode || 'both') === item.id
+                        ? 'bg-white dark:bg-slate-700 border-indigo-600 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                        : 'border-slate-200 dark:border-slate-700 text-slate-600'
+                    }`}
+                  >
+                    <div className="font-bold text-xs">{item.title}</div>
+                    <div className="text-[10px] text-slate-400 mt-1">{item.desc}</div>
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Allocation Mode */}

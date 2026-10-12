@@ -135,22 +135,25 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </nav>
 
-          {/* Form Quick Switcher & Public Portal Action */}
+          {/* Form Quick Switcher (No Dropdown - Clean Pill Buttons) */}
           <div className="flex items-center gap-2">
             {forms.length > 0 && (
-              <div className="hidden lg:flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 text-xs">
-                <span className="text-slate-500 dark:text-slate-400">فرم فعال:</span>
-                <select
-                  value={selectedFormId}
-                  onChange={(e) => setSelectedFormId(e.target.value)}
-                  className="bg-transparent font-medium text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer max-w-[140px] truncate"
-                >
-                  {forms.map((f) => (
-                    <option key={f.id} value={f.id} className="dark:bg-slate-800 dark:text-slate-200">
-                      {f.title}
-                    </option>
-                  ))}
-                </select>
+              <div className="hidden lg:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-1 text-xs font-semibold">
+                <span className="text-slate-400 dark:text-slate-500 text-[11px] px-1.5">فرم:</span>
+                {forms.map((f) => (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => setSelectedFormId(f.id)}
+                    className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer max-w-[150px] truncate ${
+                      selectedFormId === f.id
+                        ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 font-bold shadow-xs'
+                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                  >
+                    {f.title}
+                  </button>
+                ))}
               </div>
             )}
 

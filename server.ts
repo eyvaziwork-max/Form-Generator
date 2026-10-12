@@ -985,13 +985,14 @@ app.patch('/api/surveys/:id/status', (req, res) => {
 app.post('/api/surveys/:id/submit', async (req, res) => {
   try {
     const { id } = req.params;
-    const { unitId, answers, respondent } = req.body;
+    const { unitId, answers, evaluatedStaff, respondent } = req.body;
     if (!unitId || !answers || typeof answers !== 'object') {
       return res.status(400).json({ success: false, message: 'شناسه واحد سازمانی و پاسخ‌های ارسالی الزامی هستند.' });
     }
     const result = await surveyStorage.submitSurveyResponse(id, {
       unitId,
       answers,
+      evaluatedStaff,
       respondent,
     });
     if (!result.success) {

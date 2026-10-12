@@ -15,6 +15,19 @@ export interface UserAccessProfile {
   allowedUnitIds: string[]; // If empty and super_admin, means all
 }
 
+export interface StaffMember {
+  id: string;
+  unitId: string;
+  fullName: string;
+  personnelCode: string;
+  jobTitle: string;
+  avatarUrl?: string;
+  roleInUnit?: string; // e.g. سرپرستار، کارشناس مسئول، پرستار بالینی، بهیار
+  email?: string;
+  phone?: string;
+  isActive: boolean;
+}
+
 export interface OrganizationalUnit {
   id: string;
   name: string;
@@ -27,7 +40,14 @@ export interface OrganizationalUnit {
   isActive: boolean;
   surveyCount?: number;
   responseCount?: number;
+  imageUrl?: string;
+  staffMembers?: StaffMember[];
 }
+
+export type SurveyEvaluationTargetMode =
+  | 'general' // General unit / organization feedback
+  | 'staff_evaluation' // Evaluate a specific individual in selected unit
+  | 'both'; // Can evaluate unit and optionally or mandatorily a staff member
 
 export type SurveyQuestionType =
   | 'short_text'
@@ -54,6 +74,7 @@ export interface SurveyQuestionOption {
   label: string;
   value: string;
   score?: number; // Score mapping for calculating satisfaction
+  imageUrl?: string;
 }
 
 export interface SurveyMatrixRow {
@@ -107,6 +128,8 @@ export interface SurveyQuestion {
   max?: number;
   npsLabels?: { low: string; high: string };
   rules?: SurveyConditionalRule[];
+  isStaffSpecific?: boolean; // If true, questions apply specifically to selected staff member
+  targetStaffId?: string; // Optional: can be bound to a specific staff member or 'any_selected'
 }
 
 export interface SurveyTopicSection {
@@ -157,6 +180,7 @@ export interface Survey {
   version: number;
   status: 'draft' | 'active' | 'paused' | 'archived';
   allocationMode: SurveyAllocationMode;
+  evaluationTargetMode?: SurveyEvaluationTargetMode; // 'general' | 'staff_evaluation' | 'both'
   assignedUnitIds: string[];
   anonymityMode: SurveyAnonymityMode;
   minAnonymousGroupSize: number; // e.g. 3 or 5 for privacy protection
@@ -180,6 +204,12 @@ export interface SurveyResponse {
   periodName?: string;
   unitId: string;
   unitName: string;
+  evaluatedStaff?: {
+    id: string;
+    fullName: string;
+    personnelCode?: string;
+    jobTitle?: string;
+  };
   trackingCode: string;
   anonymityMode: SurveyAnonymityMode;
   respondent?: {

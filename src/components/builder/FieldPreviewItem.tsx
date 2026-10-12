@@ -59,19 +59,23 @@ export const FieldPreviewItem: React.FC<FieldPreviewItemProps> = ({
 
       case 'select':
         return (
-          <select
-            disabled
-            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 rounded-xl px-3 py-2 text-xs cursor-not-allowed"
-          >
-            <option>
-              {field.placeholder || '-- لطفاً یک گزینه را انتخاب کنید --'}
-            </option>
-            {field.options?.map((opt) => (
-              <option key={opt.id} value={opt.value}>
-                {opt.label}
-              </option>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+            {(field.options && field.options.length > 0
+              ? field.options
+              : [
+                  { id: '1', label: 'گزینه اول', value: '1' },
+                  { id: '2', label: 'گزینه دوم', value: '2' },
+                ]
+            ).map((opt) => (
+              <div
+                key={opt.id}
+                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center justify-between"
+              >
+                <span className="truncate">{opt.label}</span>
+                <span className="w-3.5 h-3.5 rounded-full border border-slate-300 dark:border-slate-600 shrink-0 mr-1" />
+              </div>
             ))}
-          </select>
+          </div>
         );
 
       case 'radio':

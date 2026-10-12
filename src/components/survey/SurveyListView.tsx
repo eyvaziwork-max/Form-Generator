@@ -175,38 +175,58 @@ export const SurveyListView: React.FC<SurveyListViewProps> = ({
           />
         </div>
 
-        {/* Dropdown Filters */}
-        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-end">
-          {/* Unit Filter */}
-          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
-            <span className="text-slate-500 dark:text-slate-400">واحد سازمانی:</span>
-            <select
-              value={selectedUnitFilter}
-              onChange={(e) => setSelectedUnitFilter(e.target.value)}
-              className="bg-transparent font-bold text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer max-w-[150px] truncate"
+        {/* Interactive Filter Chips (No Dropdowns) */}
+        <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
+          {/* Unit Filter Chips */}
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/80 dark:border-slate-700 text-xs font-bold overflow-x-auto max-w-full">
+            <button
+              type="button"
+              onClick={() => setSelectedUnitFilter('all')}
+              className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer whitespace-nowrap ${
+                selectedUnitFilter === 'all'
+                  ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
             >
-              <option value="all">همه واحدها</option>
-              {units.map((u) => (
-                <option key={u.id} value={u.id} className="dark:bg-slate-800">
-                  {u.name}
-                </option>
-              ))}
-            </select>
+              همه بخش‌ها
+            </button>
+            {units.slice(0, 5).map((u) => (
+              <button
+                key={u.id}
+                type="button"
+                onClick={() => setSelectedUnitFilter(u.id)}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer whitespace-nowrap ${
+                  selectedUnitFilter === u.id
+                    ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                    : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                }`}
+              >
+                {u.name.replace('بخش مراقبت‌های ویژه (ICU)', 'ICU').replace('بخش مراقبت‌های ویژه قلبی (CCU)', 'CCU').replace('بخش اورژانس و تروما', 'اورژانس').replace('بخش بستری داخلی', 'داخلی')}
+              </button>
+            ))}
           </div>
 
-          {/* Status Filter */}
-          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
-            <span className="text-slate-500 dark:text-slate-400">وضعیت:</span>
-            <select
-              value={selectedStatusFilter}
-              onChange={(e) => setSelectedStatusFilter(e.target.value)}
-              className="bg-transparent font-bold text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer"
-            >
-              <option value="all">همه وضعیت‌ها</option>
-              <option value="active">فعال</option>
-              <option value="paused">متوقف</option>
-              <option value="draft">پیش‌نویس</option>
-            </select>
+          {/* Status Filter Chips (No Dropdown) */}
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200/80 dark:border-slate-700 text-xs font-bold">
+            {[
+              { id: 'all', label: 'همه وضعیت‌ها' },
+              { id: 'active', label: 'فعال' },
+              { id: 'paused', label: 'متوقف' },
+              { id: 'draft', label: 'پیش‌نویس' },
+            ].map((st) => (
+              <button
+                key={st.id}
+                type="button"
+                onClick={() => setSelectedStatusFilter(st.id)}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                  selectedStatusFilter === st.id
+                    ? 'bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-xs'
+                    : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                }`}
+              >
+                {st.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>

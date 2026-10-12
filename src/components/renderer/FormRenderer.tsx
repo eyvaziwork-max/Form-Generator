@@ -437,32 +437,40 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
                   </div>
                 )}
 
-                {/* Dropdown / Select */}
+                {/* Choice Cards (Replaces dropdown select with clean visual cards) */}
                 {field.type === 'select' && (
-                  <div className="relative">
-                    <select
-                      id={`input-${field.id}`}
-                      value={values[field.name] || ''}
-                      onChange={(e) => handleInputChange(field, e.target.value)}
-                      onBlur={() => handleInputBlur(field)}
-                      aria-invalid={hasError}
-                      className={`w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 transition-all cursor-pointer ${
-                        hasError
-                          ? 'border-rose-400 dark:border-rose-600 ring-rose-500/20 bg-rose-50/30 dark:bg-rose-950/30'
-                          : isValid
-                          ? 'border-emerald-400 dark:border-emerald-600 ring-emerald-500/20 bg-emerald-50/20 dark:bg-emerald-950/30'
-                          : 'border-slate-200 dark:border-slate-700 focus:ring-indigo-500/20 focus:border-indigo-500'
-                      }`}
-                    >
-                      <option value="" className="dark:bg-slate-800 dark:text-slate-400">
-                        {field.placeholder || '-- لطفاً یک گزینه را انتخاب فرمایید --'}
-                      </option>
-                      {field.options?.map((opt) => (
-                        <option key={opt.id} value={opt.value} className="dark:bg-slate-800 dark:text-white">
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
+                  <div className="space-y-2 pt-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {field.options?.map((opt) => {
+                        const isSelected = String(values[field.name]) === String(opt.value);
+                        return (
+                          <button
+                            key={opt.id}
+                            type="button"
+                            onClick={() => {
+                              handleInputChange(field, opt.value);
+                              handleInputBlur(field);
+                            }}
+                            className={`p-3 rounded-xl border text-right transition-all flex items-center justify-between gap-3 cursor-pointer ${
+                              isSelected
+                                ? 'bg-indigo-50/90 dark:bg-indigo-950/70 border-indigo-600 dark:border-indigo-500 text-indigo-900 dark:text-indigo-100 font-bold shadow-xs ring-2 ring-indigo-500/20'
+                                : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-slate-50/50'
+                            }`}
+                          >
+                            <span className="text-xs sm:text-sm font-medium">{opt.label}</span>
+                            <div
+                              className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                                isSelected
+                                  ? 'bg-indigo-600 text-white'
+                                  : 'border border-slate-300 dark:border-slate-600'
+                              }`}
+                            >
+                              {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
 

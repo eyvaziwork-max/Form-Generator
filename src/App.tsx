@@ -104,6 +104,9 @@ export default function App() {
 
         if (surveyParam || unitParam || tabParam === 'survey' || tabParam === 'surveys') {
           setCurrentTab('surveys');
+          if (viewParam === 'user' || viewParam === 'respondent') {
+            setIsUserOnlyMode(true);
+          }
         } else if (tabParam === 'docs' || tabParam === 'swagger' || tabParam === 'api-docs') {
           setCurrentTab('api-docs');
         }

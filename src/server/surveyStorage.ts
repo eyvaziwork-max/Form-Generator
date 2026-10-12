@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {
   OrganizationalUnit,
+  StaffMember,
   Survey,
   SurveyResponse,
   SurveyTopicSection,
@@ -78,6 +79,53 @@ const initialUnits: OrganizationalUnit[] = [
     staffCount: 45,
     order: 1,
     isActive: true,
+    staffMembers: [
+      {
+        id: 'staff-icu-01',
+        unitId: 'unit-icu-01',
+        fullName: 'خانم فاطمه سلیمانی',
+        personnelCode: 'N-1014',
+        jobTitle: 'سرپرستار بخش مراقبت‌های ویژه (ICU)',
+        roleInUnit: 'سرپرستار بخش',
+        isActive: true,
+      },
+      {
+        id: 'staff-icu-02',
+        unitId: 'unit-icu-01',
+        fullName: 'خانم نسترن نوری',
+        personnelCode: 'N-2045',
+        jobTitle: 'کارشناس ارشد پرستاری مراقبت‌های ویژه',
+        roleInUnit: 'پرستار مسئول شیفت',
+        isActive: true,
+      },
+      {
+        id: 'staff-icu-03',
+        unitId: 'unit-icu-01',
+        fullName: 'آقای محمدمهدی طاهری',
+        personnelCode: 'N-3088',
+        jobTitle: 'کارشناس پرستاری بالینی',
+        roleInUnit: 'پرستار بالینی',
+        isActive: true,
+      },
+      {
+        id: 'staff-icu-04',
+        unitId: 'unit-icu-01',
+        fullName: 'خانم سارا حسینی',
+        personnelCode: 'N-4012',
+        jobTitle: 'کارشناس پرستاری بالینی',
+        roleInUnit: 'پرستار بالینی',
+        isActive: true,
+      },
+      {
+        id: 'staff-icu-05',
+        unitId: 'unit-icu-01',
+        fullName: 'آقای پیام احمدی',
+        personnelCode: 'N-5091',
+        jobTitle: 'بهیار بخش مراقبت‌های ویژه',
+        roleInUnit: 'بهیار',
+        isActive: true,
+      },
+    ],
   },
   {
     id: 'unit-ccu-01',
@@ -89,6 +137,44 @@ const initialUnits: OrganizationalUnit[] = [
     staffCount: 32,
     order: 2,
     isActive: true,
+    staffMembers: [
+      {
+        id: 'staff-ccu-01',
+        unitId: 'unit-ccu-01',
+        fullName: 'آقای محمدرضا کریمی',
+        personnelCode: 'N-1088',
+        jobTitle: 'سرپرستار بخش مراقبت‌های ویژه قلبی',
+        roleInUnit: 'سرپرستار بخش',
+        isActive: true,
+      },
+      {
+        id: 'staff-ccu-02',
+        unitId: 'unit-ccu-01',
+        fullName: 'خانم الهام رضوی',
+        personnelCode: 'N-2114',
+        jobTitle: 'کارشناس پرستاری قلب و عروق',
+        roleInUnit: 'پرستار مسئول شیفت',
+        isActive: true,
+      },
+      {
+        id: 'staff-ccu-03',
+        unitId: 'unit-ccu-01',
+        fullName: 'آقای حسین فرهمند',
+        personnelCode: 'N-3155',
+        jobTitle: 'کارشناس پرستاری بالینی',
+        roleInUnit: 'پرستار بالینی',
+        isActive: true,
+      },
+      {
+        id: 'staff-ccu-04',
+        unitId: 'unit-ccu-01',
+        fullName: 'خانم رویا مرادی',
+        personnelCode: 'N-4190',
+        jobTitle: 'کارشناس پرستاری بالینی',
+        roleInUnit: 'پرستار بالینی',
+        isActive: true,
+      },
+    ],
   },
   {
     id: 'unit-emg-01',
@@ -100,6 +186,44 @@ const initialUnits: OrganizationalUnit[] = [
     staffCount: 50,
     order: 3,
     isActive: true,
+    staffMembers: [
+      {
+        id: 'staff-emg-01',
+        unitId: 'unit-emg-01',
+        fullName: 'آقای حمید حسینی',
+        personnelCode: 'N-1120',
+        jobTitle: 'سرپرستار بخش اورژانس و تروما',
+        roleInUnit: 'سرپرستار بخش',
+        isActive: true,
+      },
+      {
+        id: 'staff-emg-02',
+        unitId: 'unit-emg-01',
+        fullName: 'خانم شیما زارع',
+        personnelCode: 'N-2240',
+        jobTitle: 'کارشناس پرستاری تریاژ اورژانس',
+        roleInUnit: 'مسئول تریاژ',
+        isActive: true,
+      },
+      {
+        id: 'staff-emg-03',
+        unitId: 'unit-emg-01',
+        fullName: 'آقای داوود قاسمی',
+        personnelCode: 'N-3310',
+        jobTitle: 'کارشناس پرستاری احیا (CPR)',
+        roleInUnit: 'پرستار اتاق احیا',
+        isActive: true,
+      },
+      {
+        id: 'staff-emg-04',
+        unitId: 'unit-emg-01',
+        fullName: 'خانم پروانه بهمنی',
+        personnelCode: 'N-4425',
+        jobTitle: 'کارشناس پرستاری بخش تحت نظر',
+        roleInUnit: 'پرستار بالینی',
+        isActive: true,
+      },
+    ],
   },
   {
     id: 'unit-int-01',
@@ -111,6 +235,26 @@ const initialUnits: OrganizationalUnit[] = [
     staffCount: 28,
     order: 4,
     isActive: true,
+    staffMembers: [
+      {
+        id: 'staff-int-01',
+        unitId: 'unit-int-01',
+        fullName: 'خانم زهرا نوری',
+        personnelCode: 'N-1199',
+        jobTitle: 'سرپرستار بخش بستری داخلی',
+        roleInUnit: 'سرپرستار بخش',
+        isActive: true,
+      },
+      {
+        id: 'staff-int-02',
+        unitId: 'unit-int-01',
+        fullName: 'آقای بهزاد شریفی',
+        personnelCode: 'N-2350',
+        jobTitle: 'کارشناس پرستاری بالینی',
+        roleInUnit: 'پرستار بالینی',
+        isActive: true,
+      },
+    ],
   },
   {
     id: 'unit-surg-01',
@@ -264,6 +408,7 @@ const initialSurvey: Survey = {
   version: 2,
   status: 'active',
   allocationMode: 'shared_segmented', // Shared survey across departments, segmented by unit
+  evaluationTargetMode: 'both', // Supports general unit questions and evaluating selected staff member
   assignedUnitIds: [
     'unit-nurse-01',
     'unit-icu-01',
@@ -350,11 +495,19 @@ const initialSurvey: Survey = {
       weight: 0.8,
     },
     {
+      id: 'sec-staff-eval',
+      surveyId: 'survey-nursing-eval-01',
+      title: 'ارزیابی عملکرد فرد منتخب کادر درمان',
+      description: 'سؤالات ارزیابی تخصصی مربوط به پرسنل و فرد انتخاب‌شده در بخش پرستاری',
+      order: 5,
+      weight: 1.0,
+    },
+    {
       id: 'sec-feedback',
       surveyId: 'survey-nursing-eval-01',
       title: 'پیشنهادات سازنده و توسعه فردی',
       description: 'بازخورد آزاد، نقاط قوت و پیشنهادهای بهبود عملکرد بیمارستان',
-      order: 5,
+      order: 6,
       weight: 0.5,
     },
   ],
@@ -514,7 +667,58 @@ const initialSurvey: Survey = {
       npsLabels: { low: 'اصلاً توصیه نمی‌کنم (۰)', high: 'قطعاً توصیه می‌کنم (۱۰)' },
     },
 
-    // Section 5: Feedback & Open Suggestions
+    // Section 5: Staff-Specific Evaluation Questions (سؤالات ارزیابی فرد انتخاب‌شده)
+    {
+      id: 'q-staff-01',
+      sectionId: 'sec-staff-eval',
+      type: 'star_rating',
+      title: 'مهارت بالینی، دقت در تحویل شیفت و مراقبت از بیمار توسط همکار منتخب:',
+      description: 'ارزیابی کیفیت عملکرد بالینی و مسئولیت‌پذیری فرد انتخاب‌شده در بخش (از ۱ تا ۵ ستاره)',
+      required: true,
+      order: 11,
+      isStaffSpecific: true,
+    },
+    {
+      id: 'q-staff-02',
+      sectionId: 'sec-staff-eval',
+      type: 'likert',
+      title: 'نحوه برخورد، اخلاق حرفه‌ای و تعامل محترمانه این همکار با بیماران و سایر پرسنل شیفت:',
+      required: true,
+      order: 12,
+      isStaffSpecific: true,
+      options: [
+        { id: 'st-opt-1', label: 'بسیار ضعیف', value: '1', score: 20 },
+        { id: 'st-opt-2', label: 'ضعیف', value: '2', score: 40 },
+        { id: 'st-opt-3', label: 'متوسط و قابل قبول', value: '3', score: 60 },
+        { id: 'st-opt-4', label: 'خوب و باحوصله', value: '4', score: 80 },
+        { id: 'st-opt-5', label: 'بسیار عالی و الگو', value: '5', score: 100 },
+      ],
+    },
+    {
+      id: 'q-staff-03',
+      sectionId: 'sec-staff-eval',
+      type: 'yes_no',
+      title: 'آیا سرعت پاسخ‌دهی و مدیریت شرایط بحرانی (کد احیا/بیمار بدحال) این فرد را تأیید می‌کنید؟',
+      required: true,
+      order: 13,
+      isStaffSpecific: true,
+      options: [
+        { id: 'st-yn-1', label: 'بله، کاملاً مسلط و سریع', value: 'yes', score: 100 },
+        { id: 'st-yn-2', label: 'خیر، نیاز به آموزش و تمرین دارد', value: 'no', score: 35 },
+      ],
+    },
+    {
+      id: 'q-staff-04',
+      sectionId: 'sec-staff-eval',
+      type: 'long_text',
+      title: 'نظر، تقدیر یا نکته آموزشی خاص شما در مورد عملکرد این همکار در بخش:',
+      placeholder: 'نقاط قوت، عملکرد برجسته یا زمینه‌های نیازمند بهبود فرد انتخاب‌شده را بنویسید...',
+      required: false,
+      order: 14,
+      isStaffSpecific: true,
+    },
+
+    // Section 6: Feedback & Open Suggestions
     {
       id: 'q-feed-01',
       sectionId: 'sec-feedback',
@@ -522,7 +726,7 @@ const initialSurvey: Survey = {
       title: 'مهم‌ترین پیشنهاد شما برای افزایش رضایت پرسنل و ارتقای ایمنی بیماران در بخش چیست؟',
       placeholder: 'دیدگاه‌ها و راهکارهای اصلاحی خود را آزادانه و بدون نگرانی بنویسید (پاسخ‌ها در حالت محرمانه نگهداری می‌شوند)...',
       required: false,
-      order: 11,
+      order: 15,
     },
   ],
   createdAt: new Date(Date.now() - 30 * 86400000).toISOString(),
@@ -672,7 +876,27 @@ export class SurveyStorage {
         const fileContent = fs.readFileSync(DATA_FILE, 'utf-8');
         const parsed = JSON.parse(fileContent);
         if (parsed && Array.isArray(parsed.units) && Array.isArray(parsed.surveys)) {
+          // Enrich existing units with initial seed staffMembers if missing
+          parsed.units = parsed.units.map((u: OrganizationalUnit) => {
+            const seed = initialUnits.find((su) => su.id === u.id);
+            if (seed && seed.staffMembers && (!u.staffMembers || u.staffMembers.length === 0)) {
+              return { ...u, staffMembers: seed.staffMembers };
+            }
+            return u;
+          });
+
+          // Enrich nursing survey with staff evaluation section & questions if missing
+          const nursingSurvey = parsed.surveys.find((s: Survey) => s.id === 'survey-nursing-eval-01');
+          if (nursingSurvey) {
+            nursingSurvey.evaluationTargetMode = nursingSurvey.evaluationTargetMode || 'both';
+            if (!nursingSurvey.sections.some((sec: any) => sec.id === 'sec-staff-eval')) {
+              nursingSurvey.sections = initialSurvey.sections;
+              nursingSurvey.questions = initialSurvey.questions;
+            }
+          }
+
           this.data = parsed;
+          this.saveData();
           return;
         }
       }
@@ -978,6 +1202,12 @@ export class SurveyStorage {
     submissionData: {
       unitId: string;
       answers: Record<string, any>;
+      evaluatedStaff?: {
+        id: string;
+        fullName: string;
+        personnelCode?: string;
+        jobTitle?: string;
+      };
       respondent?: { personnelCode?: string; fullName?: string; jobTitle?: string };
     }
   ): Promise<{ success: boolean; trackingCode?: string; message: string; overallScore?: number }> {
@@ -1057,6 +1287,7 @@ export class SurveyStorage {
       periodName: survey.periods.find((p) => p.id === survey.currentPeriodId)?.name || 'دوره جاری',
       unitId: submissionData.unitId,
       unitName,
+      evaluatedStaff: submissionData.evaluatedStaff,
       trackingCode,
       anonymityMode: survey.anonymityMode,
       respondent: storedRespondent,

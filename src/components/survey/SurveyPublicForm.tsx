@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   ClipboardCheck,
   CheckCircle2,
@@ -31,8 +31,10 @@ import {
   Camera,
   UploadCloud,
   Image as ImageIcon,
+  QrCode,
 } from 'lucide-react';
 import { Survey, OrganizationalUnit, StaffMember } from '../../types/survey';
+import { QRCodeManager } from './QRCodeManager';
 
 interface SurveyPublicFormProps {
   survey: Survey;
@@ -81,6 +83,15 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
   const [staffSearchQuery, setStaffSearchQuery] = useState('');
   const [unitSearchQuery, setUnitSearchQuery] = useState('');
   const [showUnitsSection, setShowUnitsSection] = useState(true);
+  const [qrModalData, setQrModalData] = useState<{
+    isOpen: boolean;
+    url: string;
+    title: string;
+    subtitle: string;
+  }>({ isOpen: false, url: '', title: '', subtitle: '' });
+
+  const staffSectionRef = useRef<HTMLDivElement | null>(null);
+  const questionsSectionRef = useRef<HTMLFormElement | null>(null);
 
   // Persistent / dynamic photos for unit cards & staff cards (supports adding photos to cards)
   const [unitPhotos, setUnitPhotos] = useState<Record<string, string>>(() => {
@@ -993,7 +1004,10 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
                 return (
                   <div
                     key={u.id}
-                    onClick={() => setSelectedUnitId(u.id)}
+                    onClick={() => {
+                      setSelectedUnitId(u.id);
+                      staffSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }}
                     className={`group relative rounded-2xl border text-right transition-all overflow-hidden cursor-pointer flex flex-col justify-between ${
                       isSelected
                         ? 'bg-indigo-50/90 dark:bg-indigo-950/70 border-indigo-600 dark:border-indigo-500 shadow-md ring-2 ring-indigo-500/20'
@@ -1014,6 +1028,26 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
                         </div>
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                      {/* QR Code & Direct Link Button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const url = `${window.location.origin}${window.location.pathname}?surveyId=${survey.id}&unitId=${u.id}`;
+                          setQrModalData({
+                            isOpen: true,
+                            url,
+                            title: survey.title,
+                            subtitle: `بخش: ${u.name}`,
+                          });
+                        }}
+                        className="absolute top-2 left-24 px-2 py-1 rounded-lg bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors shadow-xs"
+                        title="دریافت QR کد و لینک مستقیم این بخش"
+                      >
+                        <QrCode className="w-3 h-3 text-cyan-300" />
+                        <span>QR و لینک</span>
+                      </button>
 
                       {/* Add / Change Photo Button */}
                       <label
@@ -1067,7 +1101,7 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
 
           {/* 2. Staff Cards Section (If unit has staff) */}
           {availableStaff.length > 0 && (
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-6 border border-slate-200/90 dark:border-slate-800 shadow-md space-y-4">
+            <div ref={staffSectionRef} className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-6 border border-slate-200/90 dark:border-slate-800 shadow-md space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
@@ -1103,7 +1137,10 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
                   return (
                     <div
                       key={staff.id}
-                      onClick={() => setSelectedStaffMember(staff)}
+                      onClick={() => {
+                        setSelectedStaffMember(staff);
+                        questionsSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
                       className={`group relative p-3 rounded-2xl border text-right transition-all cursor-pointer flex items-center justify-between gap-2.5 ${
                         isSelected
                           ? 'bg-indigo-50/90 dark:bg-indigo-950/70 border-indigo-600 dark:border-indigo-500 shadow-sm ring-2 ring-indigo-500/20'
@@ -1156,11 +1193,30 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
                         </div>
                       </div>
 
-                      {isSelected && (
-                        <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xs">
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                        </div>
-                      )}
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const url = `${window.location.origin}${window.location.pathname}?surveyId=${survey.id}&unitId=${selectedUnitId}&staffId=${staff.id}`;
+                            setQrModalData({
+                              isOpen: true,
+                              url,
+                              title: survey.title,
+                              subtitle: `ارزیابی همکار: ${staff.fullName} (${staff.roleInUnit || staff.jobTitle})`,
+                            });
+                          }}
+                          className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-cyan-50 dark:hover:bg-cyan-950 hover:text-cyan-600 transition-colors shrink-0 shadow-2xs"
+                          title="دریافت QR کد و لینک مستقیم این همکار"
+                        >
+                          <QrCode className="w-3.5 h-3.5" />
+                        </button>
+                        {isSelected && (
+                          <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                            <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
@@ -1357,7 +1413,7 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
       )}
 
       {/* Active Section Questions */}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form ref={questionsSectionRef} onSubmit={handleSubmit} className="space-y-4">
         <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-slate-800 shadow-md space-y-6">
           <div className="border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base sm:text-lg font-black text-indigo-700 dark:text-indigo-400">
@@ -1957,6 +2013,42 @@ export const SurveyPublicForm: React.FC<SurveyPublicFormProps> = ({
           )}
         </div>
       </form>
+
+      {/* QR Code & Direct Link Modal */}
+      {qrModalData.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-800 space-y-5 text-right relative">
+            <button
+              onClick={() => setQrModalData({ isOpen: false, url: '', title: '', subtitle: '' })}
+              className="absolute top-4 left-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                <QrCode className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-black text-slate-900 dark:text-white">
+                  QR کد و لینک مستقیم اختصاصی
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  اسکن یا کپی لینک برای دسترسی مستقیم به این بخش/همکار
+                </p>
+              </div>
+            </div>
+
+            <QRCodeManager
+              url={qrModalData.url}
+              title={qrModalData.title}
+              subtitle={qrModalData.subtitle}
+              orgName="مرکز درمانی و آموزشی بیمارستان نمونه"
+              onShowToast={onShowToast}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
